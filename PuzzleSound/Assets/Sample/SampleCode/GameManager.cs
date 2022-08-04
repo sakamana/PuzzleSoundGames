@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
     // ゲームの初期化処理
     private void Start()
     {
-        board.InitializeBoard(6, 5);//ここ数字でやってるの凄い嫌なのはここいじればええんちゃう？
+        board.InitializeBoard(6, 6);//ここ数字でやってるの凄い嫌なのはここいじればええんちゃう？
 
         currentState = GameState.Idle;
     }
