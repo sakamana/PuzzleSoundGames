@@ -26,7 +26,7 @@ public class Board : MonoBehaviour {
         width = boardWidth;
         height = boardHeight;
 
-        pieceWidth = Screen.width / boardWidth;
+        pieceWidth = ( Screen.width / 3 ) / boardWidth;
 
         board = new Piece[width, height];
 
@@ -143,7 +143,7 @@ public class Board : MonoBehaviour {
     // 盤面上の位置からピースオブジェクトのワールド座標での位置を返す
     private Vector3 GetPieceWorldPos(Vector2 boardPos)
     {
-        return new Vector3(boardPos.x* pieceWidth + (pieceWidth / 2), boardPos.y* pieceWidth + (pieceWidth / 2), 0);
+        return new Vector3(boardPos.x* pieceWidth + ( Screen.width / 2 ) - pieceWidth*(2.5f), boardPos.y* pieceWidth + ( Screen.height / 2 ) - pieceWidth*(2f), 0); //ここ数字でやってるの凄い嫌だ。
     }
 
     // ピースが盤面上のどの位置にあるのかを返す
