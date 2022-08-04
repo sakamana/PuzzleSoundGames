@@ -80,11 +80,13 @@ public class GameManager : MonoBehaviour {
     }
 
     // プレイヤーがピースを選択しているときの処理、入力終了を検知したら盤面のチェックの状態に移行する
+
+    // ここを制限時間制にしたいけど、update関数の外なのでここではカウントダウン出来ない。
     private void PieceMove()
     {
         if (Input.GetMouseButton(0))
         {
-            var piece = board.GetNearestPiece(Input.mousePosition);
+            var piece = board.GetNearestPiece(Input.mousePosition); 
             if (piece != selectedPiece)
             {
                 board.SwitchPiece(selectedPiece, piece);
