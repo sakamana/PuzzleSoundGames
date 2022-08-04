@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     // const.
     public const int MachingCount = 3;
 
+    public float countdown = 5.0f;
+
     // enum.
     private enum GameState
     {
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour {
         switch (currentState)
         {
             case GameState.Idle:
+                countdown = 5.0f;
                 Idle();
                 break;
             case GameState.PieceMove:
@@ -81,20 +84,23 @@ public class GameManager : MonoBehaviour {
 
     // プレイヤーがピースを選択しているときの処理、入力終了を検知したら盤面のチェックの状態に移行する
 
-    // ここを制限時間制にしたいけど、update関数の外なのでここではカウントダウン出来ない。
+    // ここを制限時間制にしたいけど、updateの外なのでここではカウントダウン出来ない？
     private void PieceMove()
     {
         if (Input.GetMouseButton(0))
         {
+            countdown -= Time.deltaTime;
+            Debug.Log(countdown);
             var piece = board.GetNearestPiece(Input.mousePosition); 
             if (piece != selectedPiece)
             {
                 board.SwitchPiece(selectedPiece, piece);
             }
-        }
-        else if (Input.GetMouseButtonUp(0)) {
-            currentState = GameState.MatchCheck;
-        }
+            else if (countdown <= 0) 
+            {
+                currentState = GameState.MatchCheck;
+            }
+        } 
     }
 
     // 盤面上にマッチングしているピースがあるかどうかを判断する
