@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public const int MachingCount = 3;
 
     public float countdown = 5.0f;
+    public int countdownTriger = 0;
 
     // enum.
     private enum GameState
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour {
         {
             case GameState.Idle:
                 countdown = 5.0f;
+                countdownTriger = 0;
                 Idle();
                 break;
             case GameState.PieceMove:
@@ -87,20 +89,43 @@ public class GameManager : MonoBehaviour {
     // ここを制限時間制にしたいけど、updateの外なのでここではカウントダウン出来ない？
     private void PieceMove()
     {
-        if (Input.GetMouseButton(0))
-        {
-            countdown -= Time.deltaTime;
-            Debug.Log(countdown);
-            var piece = board.GetNearestPiece(Input.mousePosition); 
-            if (piece != selectedPiece)
+        //if (Input.GetMouseButtonDown(0))
+        //{
+            countdownTriger = 1;
+            if(countdownTriger == 1)
             {
-                board.SwitchPiece(selectedPiece, piece);
+                countdown -= Time.deltaTime;
+                Debug.Log(countdown);
+                if (Input.GetMouseButton(0))
+                {
+                    var piece = board.GetNearestPiece(Input.mousePosition);
+                    if (piece != selectedPiece)
+                    {
+                        board.SwitchPiece(selectedPiece, piece);
+                    }
+                }
+                else if (countdown <= 0)
+                {
+                    currentState = GameState.MatchCheck;
+                }
             }
-            else if (countdown <= 0) 
-            {
-                currentState = GameState.MatchCheck;
-            }
-        } 
+        //}
+
+
+        // if (Input.GetMouseButton(0))
+        // {
+        //     countdown -= Time.deltaTime;
+        //     Debug.Log(countdown);
+        //     var piece = board.GetNearestPiece(Input.mousePosition); 
+        //     if (piece != selectedPiece)
+        //     {
+        //         board.SwitchPiece(selectedPiece, piece);
+        //     }
+        //     else if (countdown <= 0) 
+        //     {
+        //         currentState = GameState.MatchCheck;
+        //     }
+        // } 
     }
 
     // 盤面上にマッチングしているピースがあるかどうかを判断する
