@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            selectedPiece = board.GetNearestPiece(Input.mousePosition);
+            selectedPiece = board.GetNearestPiece(Input.mousePosition); //ピースがアロンアルファ問題ここかも
             currentState = GameState.PieceMove;
         }
     }
@@ -89,8 +89,6 @@ public class GameManager : MonoBehaviour {
     // ここを制限時間制にしたいけど、updateの外なのでここではカウントダウン出来ない？
     private void PieceMove()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
             countdownTriger = 1;
             if(countdownTriger == 1)
             {
@@ -98,10 +96,10 @@ public class GameManager : MonoBehaviour {
                 Debug.Log(countdown);
                 if (Input.GetMouseButton(0))
                 {
-                    var piece = board.GetNearestPiece(Input.mousePosition);
-                    if (piece != selectedPiece)
+                    var piece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
+                    if (piece != selectedPiece)//最短距離のピースと、選択したピースが不一致
                     {
-                        board.SwitchPiece(selectedPiece, piece);
+                        board.SwitchPiece(selectedPiece, piece);//選択したピースと、場所入れ替え
                     }
                 }
                 else if (countdown <= 0)
@@ -109,23 +107,7 @@ public class GameManager : MonoBehaviour {
                     currentState = GameState.MatchCheck;
                 }
             }
-        //}
-
-
-        // if (Input.GetMouseButton(0))
-        // {
-        //     countdown -= Time.deltaTime;
-        //     Debug.Log(countdown);
-        //     var piece = board.GetNearestPiece(Input.mousePosition); 
-        //     if (piece != selectedPiece)
-        //     {
-        //         board.SwitchPiece(selectedPiece, piece);
-        //     }
-        //     else if (countdown <= 0) 
-        //     {
-        //         currentState = GameState.MatchCheck;
-        //     }
-        // } 
+        //この中で、nearestPieceをマウスクリックの度に初期化したい。
     }
 
     // 盤面上にマッチングしているピースがあるかどうかを判断する

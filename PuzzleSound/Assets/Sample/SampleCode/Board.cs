@@ -39,6 +39,7 @@ public class Board : MonoBehaviour {
         }
     }
 
+    //---------------------------------------------------------------------------ピースがアロンアルファ問題。この辺です。
     // 入力されたクリック(タップ)位置から最も近いピースの位置を返す
     public Piece GetNearestPiece(Vector3 input)
     {
@@ -73,6 +74,7 @@ public class Board : MonoBehaviour {
         board[(int)p1BoardPos.x, (int)p1BoardPos.y] = p2;
         board[(int)p2BoardPos.x, (int)p2BoardPos.y] = p1;
     }
+    //-------------------------------------------------------------------------------
 
     // 盤面上にマッチングしているピースがあるかどうかを判断する
     public bool HasMatch()
