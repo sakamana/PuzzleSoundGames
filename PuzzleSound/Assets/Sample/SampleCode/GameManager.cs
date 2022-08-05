@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour {
             {
                 countdown -= Time.deltaTime;
                 Debug.Log(countdown);
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && 0 < countdown)
                 {
                     var piece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
                     if (piece != selectedPiece)//最短距離のピースと、選択したピースが不一致
