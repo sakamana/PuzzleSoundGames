@@ -48,10 +48,8 @@ public class GameManager : MonoBehaviour {
     // ゲームのメインループ
     private void Update()
     {
-        //countdownTriger = 0;
-        countdown -= Time.deltaTime;
-        while(countdown > 0)
-        {
+        //while(countdown > 0)
+        //{
             switch (currentState)
             {
                 case GameState.Idle:
@@ -72,20 +70,21 @@ public class GameManager : MonoBehaviour {
                 default:
                     break;
             }
-        }
-        if(countdown <= 0)
-        {
-            switch (currentState)
-            {
-                case GameState.MusicTap:
-                    MusicTap();
-                    break;
-                case GameState.FillPieceAfterMusic:
-                    break;
-                default:
-                    break;
-            }
-        }
+            //if(countdown <= 0){break;}
+        //}
+        // if(countdown <= 0)
+        // {
+        //     switch (currentState)
+        //     {
+        //         case GameState.MusicTap:
+        //             MusicTap();
+        //             break;
+        //         case GameState.FillPieceAfterMusic:
+        //             break;
+        //         default:
+        //             break;
+        //     }
+        // }
         stateText.text = currentState.ToString();
     }
 
