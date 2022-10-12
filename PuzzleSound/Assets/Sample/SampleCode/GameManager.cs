@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
         MatchCheck,
         DeletePiece,
         FillPiece,
+        Music,
+        FillPieceAfterMusic,
     }
 
     // serialize field.
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour {
     // ゲームの初期化処理
     private void Start()
     {
-        board.InitializeBoard(6, 6);//ここ数字でやってるの凄い嫌なのはここいじればええんちゃう？
+        board.InitializeBoard(6, 8);//ここ数字でやってるの凄い嫌なのはここいじればええんちゃう？
 
         currentState = GameState.Idle;
     }
@@ -48,9 +50,9 @@ public class GameManager : MonoBehaviour {
     {
         switch (currentState)
         {
+            //countdownTriger = 0;
+            //countdown -= Time.deltaTime;
             case GameState.Idle:
-                countdown = 5.0f;
-                countdownTriger = 0;
                 Idle();
                 break;
             case GameState.PieceMove:
@@ -64,6 +66,11 @@ public class GameManager : MonoBehaviour {
                 break;
             case GameState.FillPiece:
                 FillPiece();
+                break;
+            case GameState.Music:
+                Music();
+                break;
+            case GameState.FillPieceAfterMusic:
                 break;
             default:
                 break;
@@ -132,5 +139,14 @@ public class GameManager : MonoBehaviour {
     {
         board.FillPiece();
         currentState = GameState.MatchCheck;
+    }
+
+    private void Music()
+    {
+        countdown -= Time.deltaTime;
+        if(countdown <= 0 )
+        {
+            currentState = GameState.MatchCheck;
+        }
     }
 }
