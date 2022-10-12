@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour {
     {
         countdown -= Time.deltaTime;
         Debug.Log(countdown);
-        while(true)
-        {
+        // while(true)
+        // {
             switch (currentState)
             {
                 case GameState.Idle:
@@ -75,8 +75,8 @@ public class GameManager : MonoBehaviour {
                 default:
                     break;
             }
-            if(countdown <= 0)break;
-        }
+        //     if(countdown <= 0)break;
+        // }
         stateText.text = currentState.ToString();
     }
 
