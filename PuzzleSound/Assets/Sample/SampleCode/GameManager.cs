@@ -89,24 +89,21 @@ public class GameManager : MonoBehaviour {
     // ここを制限時間制にしたいけど、updateの外なのでここではカウントダウン出来ない？
     private void PieceMove()
     {
-            countdownTriger = 1;
-            if(countdownTriger == 1)
+        // countdown -= Time.deltaTime;
+        // Debug.Log(countdown);
+        if (Input.GetMouseButton(0))
+        {
+            var piece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
+            if (piece != selectedPiece)//最短距離のピースと、選択したピースが不一致
             {
-                countdown -= Time.deltaTime;
-                Debug.Log(countdown);
-                if (Input.GetMouseButton(0) && 0 < countdown)
-                {
-                    var piece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
-                    if (piece != selectedPiece)//最短距離のピースと、選択したピースが不一致
-                    {
-                        board.SwitchPiece(selectedPiece, piece);//選択したピースと、場所入れ替え
-                    }
-                }
-                else if (countdown <= 0)
-                {
-                    currentState = GameState.MatchCheck;
-                }
+                board.SwitchPiece(selectedPiece, piece);//選択したピースと、場所入れ替え
             }
+        }
+        else
+        {
+            currentState = GameState.MatchCheck;
+        }
+            
         //この中で、nearestPieceをマウスクリックの度に初期化したい。
     }
 
