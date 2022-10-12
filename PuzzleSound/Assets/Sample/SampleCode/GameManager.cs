@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    // プレイヤーがピースを選択しているときの処理、入力終了を検知したら盤面のチェックの状態に移行する
+    // プレイヤーがピースを選択しているときの処理
     private void PieceMove()
     {
         // countdown -= Time.deltaTime;
