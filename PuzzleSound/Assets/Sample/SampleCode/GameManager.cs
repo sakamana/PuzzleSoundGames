@@ -107,8 +107,6 @@ public class GameManager : MonoBehaviour {
     }
 
     // プレイヤーがピースを選択しているときの処理、入力終了を検知したら盤面のチェックの状態に移行する
-
-    // ここを制限時間制にしたいけど、updateの外なのでここではカウントダウン出来ない？
     private void PieceMove()
     {
         // countdown -= Time.deltaTime;
@@ -119,6 +117,8 @@ public class GameManager : MonoBehaviour {
             if (piece != selectedPiece)//最短距離のピースと、選択したピースが不一致
             {
                 board.SwitchPiece(selectedPiece, piece);//選択したピースと、場所入れ替え
+                //Input.GetMouseButton(0) = false; 一回一回離したい。これはエラー出た。
+                currentState = GameState.MatchCheck;
             }
         }
         else
