@@ -40,15 +40,13 @@ public class GameManager : MonoBehaviour {
     // ゲームの初期化処理
     private void Start()
     {
-        board.InitializeBoard(6, 8);//ここ数字でやってるの凄い嫌なのはここいじればええんちゃう？
-
+        board.InitializeBoard(6, 8);
         currentState = GameState.Idle;
     }
 
     // ゲームのメインループ
     private void Update()
     {
-        //Timer timer = new Timer(24000);
         countdown -=Time.deltaTime;
         Debug.Log(countdown);
         if(8 < countdown) //16秒間パズルphase(24~8)
