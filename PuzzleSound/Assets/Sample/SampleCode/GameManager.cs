@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     // const.
     public const int MachingCount = 3;
 
-    public float countdown = 5.0f;
+    public float countdown;
     public int countdownTriger = 0;
 
     // enum.
@@ -48,10 +48,11 @@ public class GameManager : MonoBehaviour {
     // ゲームのメインループ
     private void Update()
     {
-        countdown -= Time.deltaTime;
+        //Timer timer = new Timer(24000);
+        countdown -=Time.deltaTime;
         Debug.Log(countdown);
-        // while(true) ここで無限ループしてそう
-        // {
+        if(8 < countdown) //16秒間パズルphase(24~8)
+        {
             switch (currentState)
             {
                 case GameState.Idle:
@@ -75,8 +76,22 @@ public class GameManager : MonoBehaviour {
                 default:
                     break;
             }
-        //     if(countdown <= 0)break;
+        }
+        // else if(0 < countdown && countdown <= 8) 0~8でリズムphase
+        // {
+        //     switch (currentState)
+        //     {
+        //         case GameState.MusicTap:
+        //             MusicTap();
+        //             break;
+        //         default:
+        //             break;
+        //     }
         // }
+        else if(countdown <= 0)
+        {
+            countdown = 24.0f;
+        }
         stateText.text = currentState.ToString();
     }
 
