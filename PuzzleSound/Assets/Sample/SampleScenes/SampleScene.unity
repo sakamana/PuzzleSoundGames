@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a7ef0c75c280048a0206e3e91564d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 16
+  countdown: 24
   countdownTriger: 0
   board: {fileID: 2129874941}
   stateText: {fileID: 1549374221}
