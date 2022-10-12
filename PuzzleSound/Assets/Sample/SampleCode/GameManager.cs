@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
         MatchCheck,
         DeletePiece,
         FillPiece,
-        Music,
+        MusicTap,
         FillPieceAfterMusic,
     }
 
@@ -48,32 +48,43 @@ public class GameManager : MonoBehaviour {
     // ゲームのメインループ
     private void Update()
     {
-        switch (currentState)
+        //countdownTriger = 0;
+        countdown -= Time.deltaTime;
+        while(countdown > 0)
         {
-            //countdownTriger = 0;
-            //countdown -= Time.deltaTime;
-            case GameState.Idle:
-                Idle();
-                break;
-            case GameState.PieceMove:
-                PieceMove();
-                break;
-            case GameState.MatchCheck:
-                MatchCheck();
-                break;
-            case GameState.DeletePiece:
-                DeletePiece();
-                break;
-            case GameState.FillPiece:
-                FillPiece();
-                break;
-            case GameState.Music:
-                Music();
-                break;
-            case GameState.FillPieceAfterMusic:
-                break;
-            default:
-                break;
+            switch (currentState)
+            {
+                case GameState.Idle:
+                    Idle();
+                    break;
+                case GameState.PieceMove:
+                    PieceMove();
+                    break;
+                case GameState.MatchCheck:
+                    MatchCheck();
+                    break;
+                case GameState.DeletePiece:
+                    DeletePiece();
+                    break;
+                case GameState.FillPiece:
+                    FillPiece();
+                    break;
+                default:
+                    break;
+            }
+        }
+        if(countdown <= 0)
+        {
+            switch (currentState)
+            {
+                case GameState.MusicTap:
+                    MusicTap();
+                    break;
+                case GameState.FillPieceAfterMusic:
+                    break;
+                default:
+                    break;
+            }
         }
         stateText.text = currentState.ToString();
     }
@@ -141,7 +152,7 @@ public class GameManager : MonoBehaviour {
         currentState = GameState.MatchCheck;
     }
 
-    private void Music()
+    private void MusicTap()
     {
         countdown -= Time.deltaTime;
         if(countdown <= 0 )
