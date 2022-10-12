@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
     {
         countdown -= Time.deltaTime;
         Debug.Log(countdown);
-        // while(true)
+        // while(true) ここで無限ループしてそう
         // {
             switch (currentState)
             {
