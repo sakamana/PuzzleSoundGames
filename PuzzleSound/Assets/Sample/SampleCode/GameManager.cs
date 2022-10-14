@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            selectedPiece = board.GetNearestPiece(Input.mousePosition); //ピースがアロンアルファ問題ここかも
+            selectedPiece = board.GetNearestPiece(Input.mousePosition);
             currentState = GameState.PieceMove;
         }
     }
@@ -109,15 +109,12 @@ public class GameManager : MonoBehaviour {
     // プレイヤーがピースを選択しているときの処理
     private void PieceMove()
     {
-        // countdown -= Time.deltaTime;
-        // Debug.Log(countdown);
         if (Input.GetMouseButton(0))
         {
             var piece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
             if (piece != selectedPiece)//最短距離のピースと、選択したピースが不一致
             {
                 board.SwitchPiece(selectedPiece, piece);//選択したピースと、場所入れ替え
-                //Input.GetMouseButton(0) = false; 一回一回離したい。これはエラー出た。
                 currentState = GameState.MatchCheck;
             }
         }
@@ -125,8 +122,6 @@ public class GameManager : MonoBehaviour {
         {
             currentState = GameState.MatchCheck;
         }
-            
-        //この中で、nearestPieceをマウスクリックの度に初期化したい。
     }
 
     // 盤面上にマッチングしているピースがあるかどうかを判断する
@@ -148,6 +143,9 @@ public class GameManager : MonoBehaviour {
         board.DeleteMatchPiece();
         currentState = GameState.FillPiece;
     }
+
+    //削除後さっき動かした場所にノーツを生成
+    //さっき動かした場所をどう指定すればよいのかが不明selectPeaceっぽい？
 
     // 盤面上のかけている部分にピースを補充する
     private void FillPiece()
