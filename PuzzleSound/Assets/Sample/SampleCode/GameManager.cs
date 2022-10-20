@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour {
     {
         if (Input.GetMouseButton(0))
         {
-            var NextPiece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
+            NextPiece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
             if (NextPiece != selectedPiece)//最短距離のピースと、選択したピースが不一致
             {
                 board.SwitchPiece(selectedPiece, NextPiece);//選択したピースと、場所入れ替え
