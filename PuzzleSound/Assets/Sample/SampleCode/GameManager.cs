@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour {
     // private.
     private GameState currentState;
     private Piece selectedPiece;
+    private Piece NextPiece;
+
+    
 
     //-------------------------------------------------------
     // MonoBehaviour Function
@@ -116,10 +119,10 @@ public class GameManager : MonoBehaviour {
     {
         if (Input.GetMouseButton(0))
         {
-            var piece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
-            if (piece != selectedPiece)//最短距離のピースと、選択したピースが不一致
+            var NextPiece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
+            if (NextPiece != selectedPiece)//最短距離のピースと、選択したピースが不一致
             {
-                board.SwitchPiece(selectedPiece, piece);//選択したピースと、場所入れ替え
+                board.SwitchPiece(selectedPiece, NextPiece);//選択したピースと、場所入れ替え
                 currentState = GameState.MatchCheck;
             }
         }
@@ -153,7 +156,7 @@ public class GameManager : MonoBehaviour {
     private void CreateNotes()
     {
         // Vector2 position = selectedPiece.transform.position;
-        board.CreateNotes(selectedPiece);
+        board.CreateNotes(selectedPiece,NextPiece);
         currentState = GameState.DeletePiece;
     }
 
