@@ -11,7 +11,7 @@ public class Board : MonoBehaviour {
     private GameObject piecePrefab;
 
     // private.
-    private Piece[,] board;
+    private Piece[,] board; //これ何？
     private int width;
     private int height;
     private int pieceWidth;
@@ -38,8 +38,7 @@ public class Board : MonoBehaviour {
             }
         }
     }
-
-    //---------------------------------------------------------------------------ピースがアロンアルファ問題。この辺です。
+    
     // 入力されたクリック(タップ)位置から最も近いピースの位置を返す
     public Piece GetNearestPiece(Vector3 input)
     {
@@ -79,7 +78,7 @@ public class Board : MonoBehaviour {
     // 盤面上にマッチングしているピースがあるかどうかを判断する
     public bool HasMatch()
     {
-        foreach (var piece in board)
+        foreach (var piece in board)　//?????boardの中のpiece全てに対してチェックしてる？そもそもpieceがどこで宣言された何なのかがよくわからない。
         {
             if (IsMatchPiece(piece))
             {
@@ -145,7 +144,7 @@ public class Board : MonoBehaviour {
     // 盤面上の位置からピースオブジェクトのワールド座標での位置を返す
     private Vector3 GetPieceWorldPos(Vector2 boardPos)
     {
-        return new Vector3(boardPos.x* pieceWidth + ( Screen.width / 2 ) - pieceWidth*(2.5f), boardPos.y* pieceWidth + ( Screen.height / 2 ) - pieceWidth*(2.5f), 0); //ここ数字でやってるの凄い嫌だ。
+        return new Vector3(boardPos.x* pieceWidth + ( Screen.width / 2 ) - pieceWidth*(2.5f), boardPos.y* pieceWidth + ( Screen.height / 2 ) - pieceWidth*(3.5f), 0); //ここ数字でやってるの凄い嫌だ。
     }
 
     // ピースが盤面上のどの位置にあるのかを返す
@@ -166,7 +165,7 @@ public class Board : MonoBehaviour {
     }
 
     // 対象のピースがマッチしているかの判定を行う
-    private bool IsMatchPiece(Piece piece)
+    private bool IsMatchPiece(Piece piece) //?????Piece pieceって何の真偽値？
     {
         // ピースの情報を取得
         var pos = GetPieceBoardPos(piece);
@@ -182,13 +181,13 @@ public class Board : MonoBehaviour {
     }
 
     // 対象の方向に引数で指定したの種類のピースがいくつあるかを返す
-    private int GetSameKindPieceNum(PieceKind kind, Vector2 piecePos, Vector2 searchDir)
+    private int GetSameKindPieceNum(PieceKind kind, Vector2 piecePos, Vector2 searchDir) 
     {
         var count = 0;
         while (true)
         {
-            piecePos += searchDir;
-            if (IsInBoard(piecePos) && board[(int)piecePos.x, (int)piecePos.y].GetKind() == kind)
+            piecePos += searchDir; //piecePos = piecePos + searchDirと同義
+            if (IsInBoard(piecePos) && board[(int)piecePos.x, (int)piecePos.y].GetKind() == kind)//対象のpieceがboardからはみ出していない且つ「たて又は横方向に隣のpiece」が同じ属性なら
             {
                 count++;
             }
@@ -210,7 +209,7 @@ public class Board : MonoBehaviour {
     private void FillPiece(Vector2 pos)
     {
         var piece = board[(int)pos.x, (int)pos.y];
-        if (piece != null && !piece.deleteFlag)
+        if (piece != null && !piece.deleteFlag)//pieceがある且つデリートフラグが立っていない
         {
             // ピースが削除されていなければ何もしない
             return;
@@ -221,14 +220,14 @@ public class Board : MonoBehaviour {
         while (IsInBoard(checkPos))
         {
             var checkPiece = board[(int)checkPos.x, (int)checkPos.y];
-            if (checkPiece != null && !checkPiece.deleteFlag)
+            if (checkPiece != null && !checkPiece.deleteFlag)//pieceがある且つデリートフラグが立っていない
             {
                 checkPiece.transform.position = GetPieceWorldPos(pos);
-                board[(int)pos.x, (int)pos.y] = checkPiece;
-                board[(int)checkPos.x, (int)checkPos.y] = null;
+                board[(int)pos.x, (int)pos.y] = checkPiece;//1個下のマスに代入
+                board[(int)checkPos.x, (int)checkPos.y] = null;//元のpieceを削除
                 return;
             }
-            checkPos += Vector2.up;
+            checkPos += Vector2.up;//さらに上のpieceで同じことする
         }
 
         // 有効なピースがなければ新しく作る
