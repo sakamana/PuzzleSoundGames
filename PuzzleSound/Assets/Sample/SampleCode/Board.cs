@@ -88,7 +88,7 @@ public class Board : MonoBehaviour {
         return false;
     }
 
-    // マッチングしているピースを削除する
+    // マッチしているピースの削除フラグを立てる
     public void DeleteMatchPiece()
     {
         // マッチしているピースの削除フラグを立てる
@@ -115,6 +115,17 @@ public class Board : MonoBehaviour {
     //     // 盤面にピースの情報をセットする
     //     board[(int)position.x, (int)position.y] = piece;//---------------------------------------------ここでエラー
     // }
+
+    //ピースのKindをNoteに変更しフラグを削除
+    public void CreateNotes(Piece piece)
+    {
+        if(piece.deleteFlag)
+        {
+            var kind = PieceKind.Note;
+            piece.SetKind(kind);
+            piece.deleteFlag = false;
+        }
+    }
 
     public void DeletePiece()
     {

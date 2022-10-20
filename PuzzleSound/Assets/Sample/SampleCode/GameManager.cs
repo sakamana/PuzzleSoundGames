@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
                     DeleteCheck();
                     break;
                 case GameState.CreateNotes:
-                    CreateNotes();//---------------------------------------------ここでエラー
+                    CreateNotes();
                     break;
                 case GameState.DeletePiece:
                     DeletePiece();
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour {
     private void CreateNotes()
     {
         // Vector2 position = selectedPiece.transform.position;
-        // board.CreateNotes(position);//---------------------------------------------ここでエラー
+        board.CreateNotes(selectedPiece);
         currentState = GameState.DeletePiece;
     }
 
