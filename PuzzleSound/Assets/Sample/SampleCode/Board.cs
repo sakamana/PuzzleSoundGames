@@ -78,9 +78,11 @@ public class Board : MonoBehaviour {
     // 盤面上にマッチングしているピースがあるかどうかを判断する
     public bool HasMatch()
     {
+        var note = PieceKind.Note;
         foreach (var piece in board)　//?????boardの中のpiece全てに対してチェックしてる？そもそもpieceがどこで宣言された何なのかがよくわからない。
         {
-            if (IsMatchPiece(piece))
+            var kind = piece.GetKind();
+            if (IsMatchPiece(piece) && kind != note)
             {
                 return true;
             }
@@ -91,10 +93,16 @@ public class Board : MonoBehaviour {
     // マッチしているピースの削除フラグを立てる
     public void DeleteMatchPiece()
     {
+        var note = PieceKind.Note;
+        
         // マッチしているピースの削除フラグを立てる
         foreach (var piece in board)
         {
-            piece.deleteFlag = IsMatchPiece(piece);
+            var kind = piece.GetKind();
+            if( kind != note)
+            {
+                piece.deleteFlag = IsMatchPiece(piece);
+            }
         }
     }
 
@@ -125,7 +133,7 @@ public class Board : MonoBehaviour {
             var kind = PieceKind.Note;
             piece1.SetKind(kind);
         }
-        else if(!piece1.deleteFlag)//NextPieceにフラグが立っている場合
+        else if(piece2.deleteFlag)//NextPieceにフラグが立っている場合
         {
             piece2.deleteFlag = false;
             var kind = PieceKind.Note;
@@ -135,6 +143,7 @@ public class Board : MonoBehaviour {
 
     public void DeletePiece()
     {
+        
         // 削除フラグが立っているオブジェクトを削除する
         foreach (var piece in board)
         {
