@@ -125,7 +125,7 @@ public class Board : MonoBehaviour {
             var kind = PieceKind.Note;
             piece1.SetKind(kind);
         }
-        else if(piece2.deleteFlag)//NextPieceにフラグが立っている場合
+        else if(!piece1.deleteFlag)//NextPieceにフラグが立っている場合
         {
             piece2.deleteFlag = false;
             var kind = PieceKind.Note;
