@@ -10,4 +10,5 @@ public enum PieceKind
     Yellow,
     Black,
     Magenta,
+    Note,
 } 

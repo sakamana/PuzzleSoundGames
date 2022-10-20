@@ -98,6 +98,24 @@ public class Board : MonoBehaviour {
         }
     }
 
+    // public void CreateNotes(Vector2 position)
+    // {
+    //     // ピースの生成位置を求める
+    //     var createPos = GetPieceWorldPos(position);
+
+    //     // 生成するピースの種類をノーツに
+    //     var kind = PieceKind.Note;
+
+    //     // ピースを生成、ボードの子オブジェクトにする
+    //     var piece = Instantiate(piecePrefab, createPos, Quaternion.identity).GetComponent<Piece>();
+    //     piece.transform.SetParent(transform);
+    //     piece.SetSize(pieceWidth);
+    //     piece.SetKind(kind);
+
+    //     // 盤面にピースの情報をセットする
+    //     board[(int)position.x, (int)position.y] = piece;//---------------------------------------------ここでエラー
+    // }
+
     public void DeletePiece()
     {
         // 削除フラグが立っているオブジェクトを削除する
@@ -132,7 +150,7 @@ public class Board : MonoBehaviour {
         var createPos = GetPieceWorldPos(position);
 
         // 生成するピースの種類をランダムに決める
-        var kind = (PieceKind)UnityEngine.Random.Range(0, Enum.GetNames(typeof(PieceKind)).Length);
+        var kind = (PieceKind)UnityEngine.Random.Range(0, Enum.GetNames(typeof(PieceKind)).Length-1);
 
         // ピースを生成、ボードの子オブジェクトにする
         var piece = Instantiate(piecePrefab, createPos, Quaternion.identity).GetComponent<Piece>();
@@ -143,6 +161,8 @@ public class Board : MonoBehaviour {
         // 盤面にピースの情報をセットする
         board[(int)position.x, (int)position.y] = piece;
     }
+
+    
 
     // 盤面上の位置からピースオブジェクトのワールド座標での位置を返す
     private Vector3 GetPieceWorldPos(Vector2 boardPos)

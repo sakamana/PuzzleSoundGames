@@ -76,6 +76,9 @@ public class Piece : MonoBehaviour
             case PieceKind.Magenta:
                 thisImage.color = Color.magenta;
                 break;
+            case PieceKind.Note:
+                thisImage.color = Color.white;
+                break;
             default:
                 break;
         }

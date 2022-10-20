@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
         PieceMove,
         MatchCheck,
         DeleteCheck,
-        //CreateNotes,
+        CreateNotes,
         DeletePiece,
         FillPiece,
         MusicTap,
@@ -67,9 +67,9 @@ public class GameManager : MonoBehaviour {
                 case GameState.DeleteCheck:
                     DeleteCheck();
                     break;
-                // case GameState.CreateNotes:
-                //     CreateNotes();
-                //     break;
+                case GameState.CreateNotes:
+                    CreateNotes();//---------------------------------------------ここでエラー
+                    break;
                 case GameState.DeletePiece:
                     DeletePiece();
                     break;
@@ -146,11 +146,18 @@ public class GameManager : MonoBehaviour {
     private void DeleteCheck()
     {
         board.DeleteMatchPiece();
+        currentState = GameState.CreateNotes;
+    }
+
+    //ノーツの生成
+    private void CreateNotes()
+    {
+        // Vector2 position = selectedPiece.transform.position;
+        // board.CreateNotes(position);//---------------------------------------------ここでエラー
         currentState = GameState.DeletePiece;
     }
 
-    //削除後さっき動かした場所にノーツを生成
-    //さっき動かした場所をどう指定すればよいのかが不明selectPeaceっぽい？
+    //フラグの立ったピース削除
     private void DeletePiece()
     {
         board.DeletePiece();
