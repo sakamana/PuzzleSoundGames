@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
         Idle,
         PieceMove,
         MatchCheck,
+        DeleteCheck,
+        //CreateNotes,
         DeletePiece,
         FillPiece,
         MusicTap,
@@ -62,12 +64,15 @@ public class GameManager : MonoBehaviour {
                 case GameState.MatchCheck:
                     MatchCheck();
                     break;
-                case GameState.DeletePiece:
-                    DeletePiece();
+                case GameState.DeleteCheck:
+                    DeleteCheck();
                     break;
                 // case GameState.CreateNotes:
                 //     CreateNotes();
                 //     break;
+                case GameState.DeletePiece:
+                    DeletePiece();
+                    break;
                 case GameState.FillPiece:
                     FillPiece();
                     break;
@@ -129,7 +134,7 @@ public class GameManager : MonoBehaviour {
     {
         if (board.HasMatch())
         {
-            currentState = GameState.DeletePiece;
+            currentState = GameState.DeleteCheck;
         }
         else
         {
@@ -137,15 +142,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    // マッチングしているピースを削除する
-    private void DeletePiece()
+    // マッチングしているピースをにフラグをたてる
+    private void DeleteCheck()
     {
         board.DeleteMatchPiece();
-        currentState = GameState.FillPiece;
+        currentState = GameState.DeletePiece;
     }
 
     //削除後さっき動かした場所にノーツを生成
     //さっき動かした場所をどう指定すればよいのかが不明selectPeaceっぽい？
+    private void DeletePiece()
+    {
+        board.DeletePiece();
+        currentState = GameState.FillPiece;
+    }
+
 
     // 盤面上のかけている部分にピースを補充する
     private void FillPiece()

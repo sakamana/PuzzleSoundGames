@@ -96,7 +96,10 @@ public class Board : MonoBehaviour {
         {
             piece.deleteFlag = IsMatchPiece(piece);
         }
+    }
 
+    public void DeletePiece()
+    {
         // 削除フラグが立っているオブジェクトを削除する
         foreach (var piece in board)
         {
