@@ -32,7 +32,7 @@ public class Board : MonoBehaviour {
         pieceWidth = ( Screen.width / 3 ) / boardWidth;
         timingBarWidth = Screen.width / 2;
 
-        CreateTimingBar(new Vector2(0,0)); //timingBarを配置
+        CreateTimingBar(new Vector2(2,2)); //timingBarを配置
 
         board = new Piece[width, height];
 
@@ -181,7 +181,9 @@ public class Board : MonoBehaviour {
         //バーの生成位置
         var createPos = GetPieceWorldPos(position);
         //バーの生成
-        var timingBar = Instantiate(TimingBar, createPos, Quaternion.identity).GetComponent<TimingBar>(); 
+        var timingBar = Instantiate(TimingBar, createPos, Quaternion.identity).GetComponent<TimingBar>();
+        timingBar.transform.SetParent(transform);
+        timingBar.SetBarSize(timingBarWidth); 
     }
 
     // 盤面上の位置からピースオブジェクトのワールド座標での位置を返す
