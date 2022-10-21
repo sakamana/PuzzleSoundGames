@@ -8,6 +8,7 @@ public class TimingBar : MonoBehaviour
     public bool deleteBarFlag;
 
     //private
+    private SpriteRenderer thisSpriteRenderer;
     private RectTransform thisRectTransform;
 
     //初期化
@@ -23,6 +24,7 @@ public class TimingBar : MonoBehaviour
     //Barの大きさをセットする
     public void SetBarSize(int size)
     {
+        this.thisSpriteRenderer = GetComponent<SpriteRenderer>();
         this.thisRectTransform.sizeDelta = Vector2.one * size;
     }
 }
