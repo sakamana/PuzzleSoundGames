@@ -509,6 +509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2129874940}
   - component: {fileID: 2129874941}
+  - component: {fileID: 2129874942}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -548,3 +549,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   piecePrefab: {fileID: 4675553913009206637, guid: 0feee45d6528d0540a51c9bd3ec7d642, type: 3}
+--- !u!114 &2129874942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129874939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16197fb6edd4fa34f8857a6489bd89d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimingBar: {fileID: 7615788827918283285, guid: 43363d089f5cdf740a1887ed95f9349e, type: 3}
