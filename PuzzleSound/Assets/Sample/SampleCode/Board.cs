@@ -9,24 +9,30 @@ public class Board : MonoBehaviour {
     // serialize field.
     [SerializeField]
     private GameObject piecePrefab;
+    [SerializeField]
+    private GameObject TimingBar;
 
     // private.
     private Piece[,] board; //これ何？
     private int width;
     private int height;
     private int pieceWidth;
+    private int timingBarWidth;
     private int randomSeed;
 
     //-------------------------------------------------------
     // Public Function
     //-------------------------------------------------------
-    // 特定の幅と高さに盤面を初期化する
+    // 特定の幅と高さに盤面を初期化する/TimingBarの位置と大きさを初期化
     public void InitializeBoard(int boardWidth, int boardHeight)
     {
         width = boardWidth;
         height = boardHeight;
 
         pieceWidth = ( Screen.width / 3 ) / boardWidth;
+        timingBarWidth = Screen.width / 2;
+
+        CreateTimingBar(new Vector2(0,0)); //timingBarを配置
 
         board = new Piece[width, height];
 
@@ -106,24 +112,6 @@ public class Board : MonoBehaviour {
         }
     }
 
-    // public void CreateNotes(Vector2 position)
-    // {
-    //     // ピースの生成位置を求める
-    //     var createPos = GetPieceWorldPos(position);
-
-    //     // 生成するピースの種類をノーツに
-    //     var kind = PieceKind.Note;
-
-    //     // ピースを生成、ボードの子オブジェクトにする
-    //     var piece = Instantiate(piecePrefab, createPos, Quaternion.identity).GetComponent<Piece>();
-    //     piece.transform.SetParent(transform);
-    //     piece.SetSize(pieceWidth);
-    //     piece.SetKind(kind);
-
-    //     // 盤面にピースの情報をセットする
-    //     board[(int)position.x, (int)position.y] = piece;//---------------------------------------------ここでエラー
-    // }
-
     //ピースのKindをNoteに変更しフラグを削除
     public void CreateNotes(Piece piece1, Piece piece2)
     {
@@ -188,7 +176,13 @@ public class Board : MonoBehaviour {
         board[(int)position.x, (int)position.y] = piece;
     }
 
-    
+    private void CreateTimingBar(Vector2 position)
+    {
+        //バーの生成位置
+        var createPos = GetPieceWorldPos(position);
+        //バーの生成
+        var timingBar = Instantiate(TimingBar, createPos, Quaternion.identity).GetComponent<TimingBar>(); 
+    }
 
     // 盤面上の位置からピースオブジェクトのワールド座標での位置を返す
     private Vector3 GetPieceWorldPos(Vector2 boardPos)
