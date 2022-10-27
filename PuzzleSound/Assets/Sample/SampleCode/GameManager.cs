@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
         DeletePiece,
         FillPiece,
         MusicTap,
+        NotesDelete,
         FillPieceAfterMusic,
     }
 
