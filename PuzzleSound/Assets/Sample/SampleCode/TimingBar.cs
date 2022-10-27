@@ -24,7 +24,6 @@ public class TimingBar : MonoBehaviour
     //Barの大きさをセットする
     public void SetBarSize(int size)
     {
-        this.thisSpriteRenderer = GetComponent<SpriteRenderer>();
         this.thisRectTransform.sizeDelta = Vector2.one * size;
     }
 }
