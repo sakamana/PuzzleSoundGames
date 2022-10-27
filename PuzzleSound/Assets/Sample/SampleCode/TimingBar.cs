@@ -24,6 +24,7 @@ public class TimingBar : MonoBehaviour
     //Barの大きさをセットする
     public void SetBarSize(int size)
     {
-        this.thisRectTransform.sizeDelta = Vector2.one * size;
+        var sizeBar = new Vector2(2,1); //1,1の時はピースと同じ大きさ
+        this.thisRectTransform.sizeDelta = sizeBar * size;
     }
 }
