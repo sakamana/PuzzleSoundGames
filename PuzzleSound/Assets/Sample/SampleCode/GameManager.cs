@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour {
         }
         else if(0 < countdown && countdown <= 8) //0~8でリズムphase
         {
+            currentState = GameState.MusicTap;
             switch (currentState)
             {
                 case GameState.MusicTap:
