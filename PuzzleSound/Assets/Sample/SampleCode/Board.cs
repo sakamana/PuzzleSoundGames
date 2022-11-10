@@ -32,7 +32,7 @@ public class Board : MonoBehaviour {
         pieceWidth = ( Screen.width / 3 ) / boardWidth;
         timingBarWidth = ( Screen.width / 3 ) / boardWidth;
 
-        CreateTimingBar(new Vector2(2,2)); //timingBarを配置
+        CreateTimingBar(new Vector2(2.5f,8)); //timingBarを配置
 
         board = new Piece[width, height];
 
