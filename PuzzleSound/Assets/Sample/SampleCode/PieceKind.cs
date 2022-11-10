@@ -8,7 +8,7 @@ public enum PieceKind
     Blue,
     Green,
     Yellow,
-    Black,
-    Magenta,
+    //Black,
+    //Magenta,
     Note,
 } 

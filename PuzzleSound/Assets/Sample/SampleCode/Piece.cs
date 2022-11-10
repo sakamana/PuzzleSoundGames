@@ -70,12 +70,12 @@ public class Piece : MonoBehaviour
             case PieceKind.Yellow:
                 thisImage.color = Color.yellow;
                 break;
-            case PieceKind.Black:
-                thisImage.color = Color.black;
-                break;
-            case PieceKind.Magenta:
-                thisImage.color = Color.magenta;
-                break;
+            // case PieceKind.Black:
+            //     thisImage.color = Color.black;
+            //     break;
+            // case PieceKind.Magenta:
+            //     thisImage.color = Color.magenta;
+            //     break;
             case PieceKind.Note:
                 thisImage.color = Color.white;
                 break;
