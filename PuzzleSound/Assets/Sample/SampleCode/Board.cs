@@ -20,6 +20,9 @@ public class Board : MonoBehaviour {
     private int timingBarWidth;
     private int randomSeed;
 
+    private Vector2 TimingBarPos;
+
+
     //-------------------------------------------------------
     // Public Function
     //-------------------------------------------------------
@@ -32,7 +35,8 @@ public class Board : MonoBehaviour {
         pieceWidth = ( Screen.width / 3 ) / boardWidth;
         timingBarWidth = ( Screen.width / 3 ) / boardWidth;
 
-        CreateTimingBar(new Vector2(2.5f,8)); //timingBarを配置
+        TimingBarPos = new Vector2(2.5f, 8);
+        CreateTimingBar(TimingBarPos); //timingBarを配置,位置設定
 
         board = new Piece[width, height];
 
@@ -140,6 +144,12 @@ public class Board : MonoBehaviour {
                 Destroy(piece.gameObject);
             }
         }
+    }
+
+    public void MusicTap()
+    {
+        Vector2 targetPos = new Vector2(2.5f, 0);
+        TimingBarPos = Vector2.MoveTowards(TimingBarPos, targetPos, 5.0f * Time.deltaTime);
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する

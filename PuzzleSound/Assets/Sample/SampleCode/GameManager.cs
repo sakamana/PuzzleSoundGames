@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         countdown -=Time.deltaTime;
-        //Debug.Log(countdown);
+        Debug.Log(countdown);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
             switch (currentState)
@@ -84,17 +84,17 @@ public class GameManager : MonoBehaviour {
                     break;
             }
         }
-        // else if(0 < countdown && countdown <= 8) 0~8でリズムphase
-        // {
-        //     switch (currentState)
-        //     {
-        //         case GameState.MusicTap:
-        //             MusicTap();
-        //             break;
-        //         default:
-        //             break;
-        //     }
-        // }
+        else if(0 < countdown && countdown <= 8) //0~8でリズムphase
+        {
+            switch (currentState)
+            {
+                case GameState.MusicTap:
+                    MusicTap();
+                    break;
+                default:
+                    break;
+            }
+        }
         else if(countdown <= 0)
         {
             countdown = 24.0f;
@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour {
     private void MusicTap()
     {
         countdown -= Time.deltaTime;
+        board.MusicTap();
         if(countdown <= 0 )
         {
             currentState = GameState.MatchCheck;
