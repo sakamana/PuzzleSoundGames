@@ -36,7 +36,7 @@ public class Board : MonoBehaviour {
         timingBarWidth = ( Screen.width / 3 ) / boardWidth;
 
         TimingBarPos = new Vector2(2.5f, 8);
-        CreateTimingBar(TimingBarPos); //timingBarを配置,位置設定
+        CreateTimingBar(TimingBarPos); //timingBarを配置,位置設定//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         board = new Piece[width, height];
 
@@ -146,7 +146,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public void MusicTap(float countd)
+    public void MusicTap(float countd)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         // TimingBarPos = TimingBar.transform.position;
         // Vector2 targetPos = new Vector2(2.5f, -8);
@@ -197,7 +197,7 @@ public class Board : MonoBehaviour {
         board[(int)position.x, (int)position.y] = piece;
     }
 
-    private void CreateTimingBar(Vector2 position)
+    private void CreateTimingBar(Vector2 position)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         //バーの生成位置
         var createPos = GetPieceWorldPos(position);

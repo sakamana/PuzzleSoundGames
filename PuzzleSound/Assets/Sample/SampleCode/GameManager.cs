@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour {
                     break;
             }
         }
-        else if(0 < countdown && countdown <= 8) //0~8でリズムphase
+        else if(0 < countdown && countdown <= 8) //0~8でリズムphase//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         {
             currentState = GameState.MusicTap;
             switch (currentState)
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour {
         currentState = GameState.MatchCheck;
     }
 
-    private void MusicTap()
+    private void MusicTap()//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         board.MusicTap(countdown);
         if(countdown <= 0 )
