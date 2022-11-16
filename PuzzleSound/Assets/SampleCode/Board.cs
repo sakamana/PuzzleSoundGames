@@ -36,12 +36,9 @@ public class Board : MonoBehaviour {
         pieceWidth = ( Screen.width / 3 ) / boardWidth;
         timingBarWidth = ( Screen.width / 3 ) / boardWidth;
 
-        // TimingBarPos = new Vector2(2.5f, 8);
-        // CreateTimingBar(TimingBarPos); //timingBarを配置,位置設定//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
         //バー生成
         Vector2 firstBarPos = new Vector2(Screen.width / 2, Screen.height / 2 + pieceWidth * 4.5f);
-        TimingBar.GetComponent<RectTransform>().anchoredPosition = firstBarPos;
+        TimingBar.GetComponent<RectTransform>().position = firstBarPos;
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
         var timingBar = Instantiate(TimingBar, TimingBarPos, Quaternion.identity).GetComponent<TimingBar>();
         timingBar.transform.SetParent(transform);
@@ -157,9 +154,12 @@ public class Board : MonoBehaviour {
 
     public void MusicTap(float countd)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
-        // var pos = TimingBar.GetComponent<RectTransform>().position;
-        // pos.y = -
-        // TimingBarPos
+        Vector2 BarPos = TimingBarPos;
+        BarPos.y = (Screen.height / 2 + pieceWidth * 4.5f) - pieceWidth * (8 - countd);
+        TimingBar.GetComponent<RectTransform>().position = BarPos;
+
+        TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
+        Debug.Log(TimingBarPos);
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する
