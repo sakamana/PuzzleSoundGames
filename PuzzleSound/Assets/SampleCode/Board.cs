@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -148,19 +149,7 @@ public class Board : MonoBehaviour {
 
     public void MusicTap(float countd)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
-        // TimingBarPos = TimingBar.transform.position;
-        // Vector2 targetPos = new Vector2(2.5f, -8);
-        // TimingBarPos = Vector2.MoveTowards(TimingBarPos, targetPos, 5.0f );
-
-        // TimingBar.transform.position = TimingBarPos;
-
-        // TimingBarPos = new Vector2(2.5f, 8);
-        // CreateTimingBar(TimingBarPos);
-        Vector2 pos = TimingBar.transform.position;
-        pos.y  = -countd;
         TimingBar.transform.DoMove(Vector3.zero, 1.0f);
-        
-        Debug.Log(TimingBar.transform.position);
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する
