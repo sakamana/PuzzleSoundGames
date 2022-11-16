@@ -149,7 +149,10 @@ public class Board : MonoBehaviour {
 
     public void MusicTap(float countd)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
-        TimingBar.transform.DoMove(Vector3.zero, 1.0f);
+        var pos = TimingBarPos;
+        pos.y = -countd;
+        TimingBar.GetComponent<RectTransform>().position = GetPieceWorldPos(pos);
+        Debug.Log(countd + "," + TimingBar.GetComponent<RectTransform>().position);
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する

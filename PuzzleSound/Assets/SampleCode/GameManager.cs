@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         countdown -=Time.deltaTime;
-        Debug.Log(countdown);
+        //Debug.Log(countdown);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
             switch (currentState)
