@@ -40,9 +40,9 @@ public class Board : MonoBehaviour {
         Vector2 firstBarPos = new Vector2(Screen.width / 2, Screen.height / 2 + pieceWidth * 4.5f);
         TimingBar.GetComponent<RectTransform>().position = firstBarPos;
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
-        var timingBar = Instantiate(TimingBar, TimingBarPos, Quaternion.identity).GetComponent<TimingBar>();
-        timingBar.transform.SetParent(transform);
-        timingBar.SetBarSize(timingBarWidth); 
+        //var timingBar = Instantiate(TimingBar, TimingBarPos, Quaternion.identity).GetComponent<TimingBar>();
+        //timingBar.transform.SetParent(transform);
+        //timingBar.SetBarSize(timingBarWidth); 
 
         board = new Piece[width, height];
 
