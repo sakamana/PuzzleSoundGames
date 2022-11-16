@@ -36,8 +36,14 @@ public class Board : MonoBehaviour {
         pieceWidth = ( Screen.width / 3 ) / boardWidth;
         timingBarWidth = ( Screen.width / 3 ) / boardWidth;
 
-        TimingBarPos = new Vector2(2.5f, 8);
-        CreateTimingBar(TimingBarPos); //timingBarを配置,位置設定//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TimingBarPos = new Vector2(2.5f, 8);
+        // CreateTimingBar(TimingBarPos); //timingBarを配置,位置設定//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        TimingBar.GetComponent<RectTransform>().position = Vector3.zero;
+        var createPos = TimingBar.GetComponent<RectTransform>().position;
+        var timingBar = Instantiate(TimingBar, createPos, Quaternion.identity).GetComponent<TimingBar>();
+        timingBar.transform.SetParent(transform);
+        timingBar.SetBarSize(timingBarWidth); 
 
         board = new Piece[width, height];
 
@@ -189,15 +195,15 @@ public class Board : MonoBehaviour {
         board[(int)position.x, (int)position.y] = piece;
     }
 
-    private void CreateTimingBar(Vector2 position)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    {
-        //バーの生成位置
-        var createPos = GetPieceWorldPos(position);
-        //バーの生成
-        var timingBar = Instantiate(TimingBar, createPos, Quaternion.identity).GetComponent<TimingBar>();
-        timingBar.transform.SetParent(transform);
-        timingBar.SetBarSize(timingBarWidth); 
-    }
+    // private void CreateTimingBar(Vector2 position)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // {
+    //     //バーの生成位置
+    //     var createPos = GetPieceWorldPos(position);
+    //     //バーの生成
+    //     var timingBar = Instantiate(TimingBar, createPos, Quaternion.identity).GetComponent<TimingBar>();
+    //     timingBar.transform.SetParent(transform);
+    //     timingBar.SetBarSize(timingBarWidth); 
+    // }
 
     // 盤面上の位置からピースオブジェクトのワールド座標での位置を返す
     private Vector3 GetPieceWorldPos(Vector2 boardPos)
