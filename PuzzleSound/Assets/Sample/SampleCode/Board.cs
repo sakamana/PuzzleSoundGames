@@ -158,7 +158,7 @@ public class Board : MonoBehaviour {
         // CreateTimingBar(TimingBarPos);
         Vector2 pos = TimingBar.transform.position;
         pos.y  = -countd;
-        TimingBar.transform.position = pos;
+        TimingBar.transform.DoMove(Vector3.zero, 1.0f);
         
         Debug.Log(TimingBar.transform.position);
     }
