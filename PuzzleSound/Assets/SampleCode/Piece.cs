@@ -53,14 +53,15 @@ public class Piece : MonoBehaviour
         this.thisRectTransform.sizeDelta = Vector2.one * size;
     }
 
-    // public void OnTriggerStay(Collider t)
-    // {
-    //     if (t.CompareTag("Bar"))
-    //     {
-    //         musicFlag = true;
-    //         Debug.Log("Hit");
-    //     }
-    // }
+    //バーに当たったらフラグを立てる、ここが動きません！！！！！！！
+    void OnTriggerStay(Collider t)
+    {
+        if (t.CompareTag("Bar"))
+        {
+            musicFlag = true;
+            Debug.Log("Hit");
+        }
+    }
 
     //-------------------------------------------------------
     // Private Function
