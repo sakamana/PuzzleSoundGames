@@ -155,7 +155,44 @@ public class Board : MonoBehaviour {
         TimingBar.GetComponent<RectTransform>().position = BarPos;
 
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
-        //Debug.Log(TimingBarPos);
+        if(6.5 < countd && countd <= 7.5)
+        {
+            Debug.Log("1行目");
+        }
+        else if(5.5 < countd && countd <= 6.5)
+        {
+            Debug.Log("2行目");
+        }
+        else if(4.5 < countd && countd <= 5.5)
+        {
+            Debug.Log("3行目");
+        }
+        else if(3.5 < countd && countd <= 4.5)
+        {
+            Debug.Log("4行目");
+        }
+        else if(2.5 < countd && countd <= 3.5)
+        {
+            Debug.Log("5行目");
+        }
+        else if(1.5 < countd && countd <= 2.5)
+        {
+            Debug.Log("6行目");
+        }
+        else if(0.5 < countd && countd <= 1.5)
+        {
+            Debug.Log("7行目");
+        }
+        else if(0 < countd && countd <= 0.5)
+        {
+            Debug.Log("8行目");
+        }
+        else
+        {
+            Debug.Log("今無理");
+        }
+
+        //Debug.Log(TimingBarPos.y);
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する
