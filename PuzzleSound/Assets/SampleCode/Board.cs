@@ -149,7 +149,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public void MusicTap(float countd)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void BarMovePos(float countd)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         Vector2 BarPos = TimingBarPos;
         BarPos.y = (Screen.height / 2 + pieceWidth * 4.5f) - pieceWidth * (8 - countd);
@@ -158,42 +158,72 @@ public class Board : MonoBehaviour {
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
         if(6.5 < countd && countd <= 7.5)
         {
-            Debug.Log("1行目");
+            BarYPos = 7;
         }
         else if(5.5 < countd && countd <= 6.5)
         {
-            Debug.Log("2行目");
+            BarYPos = 6;
         }
         else if(4.5 < countd && countd <= 5.5)
         {
-            Debug.Log("3行目");
+            BarYPos = 5;
         }
         else if(3.5 < countd && countd <= 4.5)
         {
-            Debug.Log("4行目");
+            BarYPos = 4;
         }
         else if(2.5 < countd && countd <= 3.5)
         {
-            Debug.Log("5行目");
+            BarYPos = 3;
         }
         else if(1.5 < countd && countd <= 2.5)
         {
-            Debug.Log("6行目");
+            BarYPos = 2;
         }
         else if(0.5 < countd && countd <= 1.5)
         {
-            Debug.Log("7行目");
+            BarYPos = 1;
         }
         else if(0 < countd && countd <= 0.5)
         {
-            Debug.Log("8行目");
+            BarYPos = 0;
         }
         else
         {
-            Debug.Log("今無理");
+            BarYPos = 10;
         }
 
         //Debug.Log(TimingBarPos.y);
+
+    }
+
+    //タップしたノーツの行数を取得する
+    public void MusicTap(Piece Tpiece)
+    {
+        var Tpos = GetPieceBoardPos(Tpiece);
+        //Debug.Log(Tpos);
+
+        var note = PieceKind.Note;
+        var kind = Tpiece.GetKind();
+
+        if(kind == note && Tpos.y == BarYPos)
+        { 
+            Tpiece.musicFlag = true;
+            Debug.Log(Tpiece.musicFlag);
+        }
+        
+    }
+
+    public void DeleteNotes()
+    {
+        // 削除フラグが立っているノーツを削除する
+        foreach (var piece in board)
+        {
+            if (piece != null && piece.musicFlag)
+            {
+                Destroy(piece.gameObject);
+            }
+        }
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する

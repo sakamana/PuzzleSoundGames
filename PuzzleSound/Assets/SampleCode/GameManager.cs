@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
         DeletePiece,
         FillPiece,
         MusicTap,
-        NotesDelete,
+        DeleteNotes,
         FillPieceAfterMusic,
     }
 
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         countdown -=Time.deltaTime;
-        //Debug.Log(currentState);
+        Debug.Log(currentState);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
             switch (currentState)
@@ -81,6 +81,9 @@ public class GameManager : MonoBehaviour {
                 case GameState.FillPiece:
                     FillPiece();
                     break;
+                case GameState.DeleteNotes:
+                    DeleteNotes();
+                    break;
                 default:
                     break;
             }
@@ -92,6 +95,9 @@ public class GameManager : MonoBehaviour {
             {
                 case GameState.MusicTap:
                     MusicTap();
+                    break;
+                case GameState.DeleteNotes:
+                    DeleteNotes();
                     break;
                 default:
                     break;
@@ -181,11 +187,24 @@ public class GameManager : MonoBehaviour {
 
     private void MusicTap()//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {   
-        board.MusicTap(countdown);
+        board.BarMovePos(countdown);
+        
+        if(Input.GetMouseButtonDown(0))//ここDowmだとまずいかも。
+        {
+            targetPiece = board.GetNearestPiece(Input.mousePosition);
+            board.MusicTap(targetPiece);//ノーツの行数の取得
+        }
+
         if(countdown <= 0 )
         {
-            currentState = GameState.MatchCheck;
+            currentState = GameState.DeleteNotes;
         }
+    }
+
+    private void DeleteNotes()
+    {
+        board.DeleteNotes();
+        currentState = GameState.FillPiece;
     }
 
     // private void MusicTap()
