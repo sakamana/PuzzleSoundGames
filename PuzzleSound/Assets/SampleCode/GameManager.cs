@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour {
     private GameState currentState;
     private Piece selectedPiece;
     private Piece NextPiece;
+    private Piece targetPiece;
 
     
 
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour {
                     break;
             }
         }
-        else if(0 < countdown && countdown <= 8) //0~8でリズムphase//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        else if(0 < countdown && countdown <= 8) //0~8でリズムphase
         {
             currentState = GameState.MusicTap;
             switch (currentState)
@@ -179,12 +180,27 @@ public class GameManager : MonoBehaviour {
     }
 
     private void MusicTap()//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    {
-        
+    {   
         board.MusicTap(countdown);
         if(countdown <= 0 )
         {
             currentState = GameState.MatchCheck;
         }
     }
+
+    // private void MusicTap()
+    // {
+    //     board.MusicTap(countdown);
+    //     if(Input.GetMouseButtonDown(0))
+    //     {
+    //         targetPiece = board.GetNearestPiece(Input.mousePosition);
+    //         board.MusicTap(targetPiece);//ノーツの行数の取得
+    //     }
+
+    //     if(countdown <= 0)
+    //     {
+    //         currentState = GameState.MatchCheck;
+    //     }
+    // }
+
 }

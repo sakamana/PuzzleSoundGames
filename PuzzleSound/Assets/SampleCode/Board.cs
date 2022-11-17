@@ -19,6 +19,7 @@ public class Board : MonoBehaviour {
     private int pieceWidth;
     private int timingBarWidth;
     private int randomSeed;
+    private int BarYPos;
 
     private Vector2 TimingBarPos;
 
