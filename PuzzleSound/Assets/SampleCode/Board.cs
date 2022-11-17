@@ -209,9 +209,8 @@ public class Board : MonoBehaviour {
         if(kind == note && Tpos.y == BarYPos)
         { 
             Tpiece.musicFlag = true;
-            Debug.Log(Tpiece.musicFlag);
         }
-        
+        Debug.Log(Tpiece.musicFlag);
     }
 
     public void DeleteNotes()
