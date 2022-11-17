@@ -40,9 +40,6 @@ public class Board : MonoBehaviour {
         Vector2 firstBarPos = new Vector2(Screen.width / 2, Screen.height / 2 + pieceWidth * 4.5f);
         TimingBar.GetComponent<RectTransform>().position = firstBarPos;
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
-        //var timingBar = Instantiate(TimingBar, TimingBarPos, Quaternion.identity).GetComponent<TimingBar>();
-        //timingBar.transform.SetParent(transform);
-        //timingBar.SetBarSize(timingBarWidth); 
 
         board = new Piece[width, height];
 
@@ -159,7 +156,7 @@ public class Board : MonoBehaviour {
         TimingBar.GetComponent<RectTransform>().position = BarPos;
 
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
-        Debug.Log(TimingBarPos);
+        //Debug.Log(TimingBarPos);
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する
@@ -195,16 +192,6 @@ public class Board : MonoBehaviour {
         // 盤面にピースの情報をセットする
         board[(int)position.x, (int)position.y] = piece;
     }
-
-    // private void CreateTimingBar(Vector2 position)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // {
-    //     //バーの生成位置
-    //     var createPos = GetPieceWorldPos(position);
-    //     //バーの生成
-    //     var timingBar = Instantiate(TimingBar, createPos, Quaternion.identity).GetComponent<TimingBar>();
-    //     timingBar.transform.SetParent(transform);
-    //     timingBar.SetBarSize(timingBarWidth); 
-    // }
 
     // 盤面上の位置からピースオブジェクトのワールド座標での位置を返す
     private Vector3 GetPieceWorldPos(Vector2 boardPos)
