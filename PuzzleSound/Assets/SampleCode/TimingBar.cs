@@ -29,4 +29,9 @@ public class TimingBar : MonoBehaviour
         this.thisRectTransform.sizeDelta = sizeBar * size;
     }
 
+    // void OnTriggerEnter2D(Collider2D other) 
+    // {
+    //     Debug.Log ("TriggeredBar");
+    // }
+
 }

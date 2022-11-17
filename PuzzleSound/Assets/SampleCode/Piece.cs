@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,12 +54,11 @@ public class Piece : MonoBehaviour
     }
 
     //バーに当たったらフラグを立てる、ここが動きません！！！！！！！
-    void OnTriggerStay(Collider t)
+    void OnTriggerEnter2D(Collider2D other) 
     {
-        if (t.CompareTag("Bar"))
+        if (other.CompareTag("Bar"))
         {
-            musicFlag = true;
-            Debug.Log("Hit");
+            Debug.Log ("Triggeredpiece");
         }
     }
 
