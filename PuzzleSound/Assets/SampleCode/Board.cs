@@ -209,6 +209,7 @@ public class Board : MonoBehaviour {
         if(kind == note && Tpos.y == BarYPos)
         { 
             Tpiece.musicFlag = true;
+            //Destroy(Tpiece.gameObject);
         }
         Debug.Log(Tpiece.musicFlag);
     }

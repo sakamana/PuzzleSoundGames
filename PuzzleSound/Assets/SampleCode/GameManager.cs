@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviour {
         currentState = GameState.MatchCheck;
     }
 
-    private void MusicTap()//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private void MusicTap()
     {   
         board.BarMovePos(countdown);
         
@@ -207,19 +207,5 @@ public class GameManager : MonoBehaviour {
         currentState = GameState.FillPiece;
     }
 
-    // private void MusicTap()
-    // {
-    //     board.MusicTap(countdown);
-    //     if(Input.GetMouseButtonDown(0))
-    //     {
-    //         targetPiece = board.GetNearestPiece(Input.mousePosition);
-    //         board.MusicTap(targetPiece);//ノーツの行数の取得
-    //     }
-
-    //     if(countdown <= 0)
-    //     {
-    //         currentState = GameState.MatchCheck;
-    //     }
-    // }
 
 }
