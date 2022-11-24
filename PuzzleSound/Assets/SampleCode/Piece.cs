@@ -82,18 +82,20 @@ public class Piece : MonoBehaviour
             case PieceKind.Yellow:
                 thisImage.color = Color.yellow;
                 break;
-            // case PieceKind.Black:
-            //     thisImage.color = Color.black;
-            //     break;
-            // case PieceKind.Magenta:
-            //     thisImage.color = Color.magenta;
-            //     break;
-            case PieceKind.Note:
-                thisImage.color = Color.cyan;
+            case PieceKind.TapNote:
+                thisImage.color = new Color(1, 0.6f, 0.6f, 1.0f);
+                break;
+            case PieceKind.FlicNote:
+                thisImage.color = new Color(0.6f, 0.8f, 1, 1.0f);
+                break;
+            case PieceKind.LongNote:
+                thisImage.color = new Color(0.6f, 1, 0.6f, 1.0f);
+                break;
+            case PieceKind.MusicNote:
+                thisImage.color = new Color(1, 1, 0.6f, 1.0f);
                 break;
             default:
                 break;
         }
-        
     }
 }

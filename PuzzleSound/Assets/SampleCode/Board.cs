@@ -91,7 +91,7 @@ public class Board : MonoBehaviour {
     // 盤面上にマッチングしているピースがあるかどうかを判断する
     public bool HasMatch()
     {
-        var note = PieceKind.Note;
+        var note = PieceKind.TapNote;//ノーツは３つ揃っても消えない
         foreach (var piece in board)　//?????boardの中のpiece全てに対してチェックしてる？そもそもpieceがどこで宣言された何なのかがよくわからない。
         {
             var kind = piece.GetKind();
@@ -106,7 +106,7 @@ public class Board : MonoBehaviour {
     // マッチしているピースの削除フラグを立てる
     public void DeleteMatchPiece()
     {
-        var note = PieceKind.Note;
+        var note = PieceKind.TapNote;
         
         // マッチしているピースの削除フラグを立てる
         foreach (var piece in board)
@@ -122,25 +122,98 @@ public class Board : MonoBehaviour {
     //ピースのKindをNoteに変更しフラグを削除
     public void CreateNotes(Piece piece1, Piece piece2)
     {
+        var tapnote = PieceKind.TapNote;
+        var flicnote = PieceKind.FlicNote;
+        var longnote = PieceKind.LongNote;
+        var musicnote = PieceKind.MusicNote;
         if(piece1.deleteFlag && !piece2.deleteFlag)//selectedPieceにフラグが立っている場合
         {
             piece1.deleteFlag = false;
-            var kind = PieceKind.Note;
-            piece1.SetKind(kind);
+            //piece1.SetKind(note);
+            switch(piece1.GetKind())
+            {
+                case PieceKind.Red:
+                    piece1.SetKind(tapnote);
+                    break;
+                case PieceKind.Blue:
+                    piece1.SetKind(flicnote);
+                    break;
+                case PieceKind.Green:
+                    piece1.SetKind(longnote);
+                    break;
+                case PieceKind.Yellow:
+                    piece1.SetKind(musicnote);
+                    break;
+                default:
+                
+                    break;
+            }
         }
         else if(piece2.deleteFlag && !piece1.deleteFlag)//NextPieceにフラグが立っている場合
         {
             piece2.deleteFlag = false;
-            var kind = PieceKind.Note;
-            piece2.SetKind(kind);
+            //piece2.SetKind(note);
+            switch(piece2.GetKind())
+            {
+                case PieceKind.Red:
+                    piece2.SetKind(tapnote);
+                    break;
+                case PieceKind.Blue:
+                    piece2.SetKind(flicnote);
+                    break;
+                case PieceKind.Green:
+                    piece2.SetKind(longnote);
+                    break;
+                case PieceKind.Yellow:
+                    piece2.SetKind(musicnote);
+                    break;
+                default:
+                
+                    break;
+            }
         }
         else if(piece1.deleteFlag && piece2.deleteFlag)
         {
             piece1.deleteFlag = false;
             piece2.deleteFlag = false;
-            var kind = PieceKind.Note;
-            piece1.SetKind(kind);
-            piece2.SetKind(kind);
+            // piece1.SetKind(note);
+            // piece2.SetKind(note);
+            switch(piece1.GetKind())
+            {
+                case PieceKind.Red:
+                    piece1.SetKind(tapnote);
+                    break;
+                case PieceKind.Blue:
+                    piece1.SetKind(flicnote);
+                    break;
+                case PieceKind.Green:
+                    piece1.SetKind(longnote);
+                    break;
+                case PieceKind.Yellow:
+                    piece1.SetKind(musicnote);
+                    break;
+                default:
+                
+                    break;
+            }
+            switch(piece2.GetKind())
+            {
+                case PieceKind.Red:
+                    piece2.SetKind(tapnote);
+                    break;
+                case PieceKind.Blue:
+                    piece2.SetKind(flicnote);
+                    break;
+                case PieceKind.Green:
+                    piece2.SetKind(longnote);
+                    break;
+                case PieceKind.Yellow:
+                    piece2.SetKind(musicnote);
+                    break;
+                default:
+                
+                    break;
+            }
         }
     }
 
@@ -211,7 +284,7 @@ public class Board : MonoBehaviour {
         var Tpos = GetPieceBoardPos(Tpiece);
         //Debug.Log(Tpos);
 
-        var note = PieceKind.Note;
+        var note = PieceKind.TapNote;
         var kind = Tpiece.GetKind();
 
         if(kind == note && Tpos.y == BarYPos)
@@ -256,7 +329,7 @@ public class Board : MonoBehaviour {
         var createPos = GetPieceWorldPos(position);
 
         // 生成するピースの種類をランダムに決める
-        var kind = (PieceKind)UnityEngine.Random.Range(0, Enum.GetNames(typeof(PieceKind)).Length-1);
+        var kind = (PieceKind)UnityEngine.Random.Range(0, Enum.GetNames(typeof(PieceKind)).Length-4); //ノーツ分マイナス
 
         // ピースを生成、ボードの子オブジェクトにする
         var piece = Instantiate(piecePrefab, createPos, Quaternion.identity).GetComponent<Piece>();

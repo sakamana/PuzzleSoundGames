@@ -10,5 +10,8 @@ public enum PieceKind
     Yellow,
     //Black,
     //Magenta,
-    Note,
+    TapNote,
+    FlicNote,
+    LongNote,
+    MusicNote,
 } 
