@@ -122,16 +122,24 @@ public class Board : MonoBehaviour {
     //ピースのKindをNoteに変更しフラグを削除
     public void CreateNotes(Piece piece1, Piece piece2)
     {
-        if(piece1.deleteFlag)//selectedPieceにフラグが立っている場合
+        if(piece1.deleteFlag && !piece2.deleteFlag)//selectedPieceにフラグが立っている場合
         {
             piece1.deleteFlag = false;
             var kind = PieceKind.Note;
             piece1.SetKind(kind);
         }
-        else if(piece2.deleteFlag)//NextPieceにフラグが立っている場合
+        else if(piece2.deleteFlag && !piece1.deleteFlag)//NextPieceにフラグが立っている場合
         {
             piece2.deleteFlag = false;
             var kind = PieceKind.Note;
+            piece2.SetKind(kind);
+        }
+        else if(piece1.deleteFlag && piece2.deleteFlag)
+        {
+            piece1.deleteFlag = false;
+            piece2.deleteFlag = false;
+            var kind = PieceKind.Note;
+            piece1.SetKind(kind);
             piece2.SetKind(kind);
         }
     }
