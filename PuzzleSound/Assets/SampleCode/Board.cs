@@ -230,7 +230,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public void BarMovePos(float countd)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void BarMovePos(float countd)
     {
         Vector2 BarPos = TimingBarPos;
         BarPos.y = (Screen.height / 2 + pieceWidth * 4.5f) - pieceWidth * (8 - countd);
@@ -273,9 +273,6 @@ public class Board : MonoBehaviour {
         {
             BarYPos = 10;
         }
-
-        //Debug.Log(TimingBarPos.y);
-
     }
 
     //タップしたノーツの行数を取得する
@@ -284,10 +281,14 @@ public class Board : MonoBehaviour {
         var Tpos = GetPieceBoardPos(Tpiece);
         //Debug.Log(Tpos);
 
-        var note = PieceKind.TapNote;
+        var ntap = PieceKind.TapNote;
+        var nflic = PieceKind.FlicNote;
+        var nlong = PieceKind.LongNote;
+        var nmusic = PieceKind.MusicNote;
+
         var kind = Tpiece.GetKind();
 
-        if(kind == note && Tpos.y == BarYPos)
+        if(kind == ntap && Tpos.y == BarYPos)
         { 
             Tpiece.musicFlag = true;
             //Destroy(Tpiece.gameObject);
@@ -297,10 +298,15 @@ public class Board : MonoBehaviour {
 
     public void DeleteNotes()
     {
+        var ntap = PieceKind.TapNote;
+        var nflic = PieceKind.FlicNote;
+        var nlong = PieceKind.LongNote;
+        var nmusic = PieceKind.MusicNote;
         // 削除フラグが立っているノーツを削除する
         foreach (var piece in board)
         {
-            if (piece != null && piece.musicFlag)
+            var kind = piece.GetKind();
+            if (piece != null && (kind == ntap || kind == nflic || kind == nlong || kind == nmusic))
             {
                 Destroy(piece.gameObject);
             }
@@ -365,7 +371,7 @@ public class Board : MonoBehaviour {
     }
 
     // 対象のピースがマッチしているかの判定を行う
-    private bool IsMatchPiece(Piece piece) //?????Piece pieceって何の真偽値？
+    private bool IsMatchPiece(Piece piece)
     {
         // ピースの情報を取得
         var pos = GetPieceBoardPos(piece);

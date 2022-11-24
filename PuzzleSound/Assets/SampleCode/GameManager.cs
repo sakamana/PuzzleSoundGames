@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
         FillPiece,
         MusicTap,
         DeleteNotes,
-        FillPieceAfterMusic,
+        AfterMusicFillPiece,
     }
 
     // serialize field.
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         countdown -=Time.deltaTime;
-        //Debug.Log(currentState);
+        Debug.Log(currentState);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
             switch (currentState)
@@ -103,9 +103,21 @@ public class GameManager : MonoBehaviour {
                     break;
             }
         }
-        else if(countdown <= 0)
+        else if(-1 < countdown && countdown <= 0)
         {
-            countdown = 24.0f;
+            currentState = GameState.DeleteNotes;
+            switch (currentState)
+            {
+                case GameState.DeleteNotes:
+                    DeleteNotes();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if(countdown <= -1)
+        {
+            countdown = 23.0f;
             currentState = GameState.Idle;
         }
         stateText.text = currentState.ToString();
@@ -204,8 +216,6 @@ public class GameManager : MonoBehaviour {
     private void DeleteNotes()
     {
         board.DeleteNotes();
-        currentState = GameState.FillPiece;
+        board.FillPiece();
     }
-
-
 }
