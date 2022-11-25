@@ -288,11 +288,15 @@ public class Board : MonoBehaviour {
 
         var kind = Tpiece.GetKind();
 
-        if(kind == ntap && Tpos.y == BarYPos)
+        if(Tpiece != null &&　kind == ntap && Tpos.y == BarYPos)
         { 
             Tpiece.musicFlag = true;
-            //Destroy(Tpiece.gameObject);
+            Destroy(Tpiece.gameObject);
             //もしpiece == nullなら、の条件分岐が必要。destroy後のpieceの無い部分をタップするとエラーが起こる。
+        }
+        else if(Tpiece  == null)
+        {
+            
         }
         Debug.Log(Tpiece.musicFlag);
     }
