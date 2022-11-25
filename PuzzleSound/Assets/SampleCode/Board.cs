@@ -292,6 +292,7 @@ public class Board : MonoBehaviour {
         { 
             Tpiece.musicFlag = true;
             //Destroy(Tpiece.gameObject);
+            //もしpiece == nullなら、の条件分岐が必要。destroy後のpieceの無い部分をタップするとエラーが起こる。
         }
         Debug.Log(Tpiece.musicFlag);
     }
