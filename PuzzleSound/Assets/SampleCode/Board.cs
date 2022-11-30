@@ -316,7 +316,7 @@ public class Board : MonoBehaviour {
         {
             touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             GetDirection();//方向を取得
-            //Debug.Log(direction);
+            Debug.Log(direction);
         }
         
         var Tpos = GetPieceBoardPos(targetPiece);
