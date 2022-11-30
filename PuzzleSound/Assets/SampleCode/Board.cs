@@ -130,7 +130,7 @@ public class Board : MonoBehaviour {
     //ピースのKindをNoteに変更しフラグを削除
     public void CreateNotes(Piece piece1, Piece piece2)
     {
-        var flicd = (FlicDir)UnityEngine.Random.Range(0, Enum.GetNames(typeof(FlicDir)).Length);
+        var flicd = (FlicDir)UnityEngine.Random.Range(0, Enum.GetNames(typeof(FlicDir)).Length-1);
         var tapnote = PieceKind.TapNote;
         var flicnote = PieceKind.FlicNote;
         var longnote = PieceKind.LongNote;
@@ -321,6 +321,7 @@ public class Board : MonoBehaviour {
         
         var Tpos = GetPieceBoardPos(targetPiece);
         var kind = PieceKind.Red; //一旦ノーツに関係ない属性で初期化してある
+        var flicd = FlicDir.nodir;
         
         if(isTap)
         {
@@ -340,7 +341,13 @@ public class Board : MonoBehaviour {
             }
             else if(kind == nflic)
             {
-
+                flicd = targetPiece.GetDir();
+                string flicdStr = flicd.ToString();
+                if(direction == flicdStr)
+                {
+                    targetPiece.musicFlag = true;
+                    Debug.Log(targetPiece.musicFlag);
+                }
             }
             else if(kind == nlong)
             {
