@@ -22,7 +22,14 @@ public class Board : MonoBehaviour {
     private int BarYPos;
 
     private Vector2 TimingBarPos;
+    
+    //MusicTapの者達
     private Piece targetPiece;
+
+    private Vector2 touchStartPos;//画面タップ開始地点の座標
+    private Vector2 touchUpPos;//現在の座標
+    private string direction;//現在のタッチの状態を代入するstring
+    private bool isTouch;//タッチされているかどうか
 
 
     //-------------------------------------------------------
@@ -283,12 +290,27 @@ public class Board : MonoBehaviour {
         if(Input.GetMouseButtonDown(0))
         {
             targetPiece = GetNearestPiece(Input.mousePosition);
+            touchStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             isTap = true;
-            Debug.Log(targetPiece.musicFlag);
+            //Debug.Log("start" + touchStartPos);
         }
+        if(Input.GetMouseButtonUp(0))
+        {
+            touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            //Debug.Log("end" + touchUpPos);
+            Debug.Log(direction);
+            GetDirection();//方向を取得
+            isTap = false;
+        }
+        // if(isTap)
+        // {
+        //     touchNowPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        //     Debug.Log("now" + touchNowPos);
+        //     //GetDirection();//方向を取得
+        // }
         
         var Tpos = GetPieceBoardPos(targetPiece);
-        var kind = PieceKind.Red;
+        var kind = PieceKind.Red; //一旦ノーツに関係ない属性で初期化してある
         
         if(isTap)
         {
@@ -299,9 +321,26 @@ public class Board : MonoBehaviour {
         var nlong = PieceKind.LongNote;
         var nmusic = PieceKind.MusicNote;
 
-        if(targetPiece != null &&　kind == ntap && Tpos.y == BarYPos)
+        if(targetPiece != null && Tpos.y == BarYPos)
         { 
-            targetPiece.musicFlag = true;
+            if(kind == ntap)
+            {
+                targetPiece.musicFlag = true;
+                
+            }
+            else if(kind == nflic)
+            {
+
+            }
+            else if(kind == nlong)
+            {
+
+            }
+            else if(kind == nmusic)
+            {
+
+            }
+            
             //Destroy(Tpiece.gameObject);
             //もしpiece == nullなら、の条件分岐が必要。destroy後のpieceの無い部分をタップするとエラーが起こる。
         }
@@ -310,37 +349,6 @@ public class Board : MonoBehaviour {
             
         }
     }
-
-    // public void MusicTap(Piece Tpiece)
-    // {
-    //     Tpiece = ;
-
-    //     if(tapnoteかつバーと座標一致なら)
-    //     {
-    //         T.piece.musicFlag = true;
-    //     }
-
-    //     if(flicnoteなら)
-    //     {
-    //         if(flicNoteCase())
-    //         {
-    //             musicflag = true;
-    //         }
-    //     }
-
-    //     if(longnoteなら)
-    //     {
-    //         if(LongNoteCase())
-    //         {
-
-    //         }
-    //     }
-
-    //     if(musicnoteなら)
-    //     {
-
-    //     }
-    // }
 
     public void DeleteNotes()
     {
@@ -486,10 +494,40 @@ public class Board : MonoBehaviour {
         CreatePiece(pos);
     }
 
-    //長押しノーツの操作
-    private void LongNoteCase(Piece piece)
+    //フリック時の方向の取得
+    private void GetDirection()
     {
-        var pos = GetPieceBoardPos(piece);
-        var kind = piece.GetKind();
+        float directionX = touchUpPos.x - touchStartPos.x;
+        float directionY = touchUpPos.y - touchStartPos.y;
+
+        //差の大きさによる条件分岐
+        if(Mathf.Abs(directionY) < Math.Abs(directionX))
+        {
+            if( 30 < directionX )
+            {
+                direction = "right";
+            }
+            else if( -30 > directionX )
+            {
+                direction = "left";
+            }
+        }
+        else if(Mathf.Abs(directionX) < Mathf.Abs(directionY))
+        {
+            if (30 < directionY)
+           {
+               direction = "up";
+           }
+           else if (-30 > directionY)
+           {
+               direction = "down";
+           }
+        }
+
+        else
+       {
+           //タッチを検出
+           direction = "touch";
+       }
     }
 }
