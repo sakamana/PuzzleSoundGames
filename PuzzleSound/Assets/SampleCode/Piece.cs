@@ -16,6 +16,7 @@ public class Piece : MonoBehaviour
     private RectTransform thisRectTransform;
     private PieceKind kind;
     private FlicDir fDir;
+    private CountLength notelength;
 
     //-------------------------------------------------------
     // MonoBehaviour Function
@@ -42,21 +43,34 @@ public class Piece : MonoBehaviour
         SetColor();
     }
 
-    //フリックノーツに方向をセットする
-    public void SetFlicDir(FlicDir flicDir)
-    {
-        fDir = flicDir;
-    }
-
     // ピースの種類を返す
     public PieceKind GetKind()
     {
         return kind;
     }
 
+    //フリックノーツに方向をセットする
+    public void SetFlicDir(FlicDir flicDir)
+    {
+        fDir = flicDir;
+    }
+
+    //方向を返す
     public FlicDir GetDir()
     {
         return fDir;
+    }
+
+    //longノーツに秒数をセットする
+    public void SetCountLength(CountLength clength)
+    {
+        notelength = clength;
+    }
+
+    //longノーツの秒数を返す
+    public CountLength GetLength()
+    {
+        return notelength;
     }
 
     // ピースのサイズをセットする

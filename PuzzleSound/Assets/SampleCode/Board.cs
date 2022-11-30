@@ -135,6 +135,8 @@ public class Board : MonoBehaviour {
         var flicnote = PieceKind.FlicNote;
         var longnote = PieceKind.LongNote;
         var musicnote = PieceKind.MusicNote;
+
+        int longcount = 1;//自分自身のフラグはfalseになるので、1をすでにカウントしておく
         if(piece1.deleteFlag && !piece2.deleteFlag)//selectedPieceにフラグが立っている場合
         {
             piece1.deleteFlag = false;
@@ -152,6 +154,16 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Green:
                     piece1.SetKind(longnote);
+                    foreach (var piece in board)
+                    {
+                        if(piece.deleteFlag)
+                        {
+                            longcount++;
+                            var enumlongcount = (CountLength)Enum.ToObject(typeof(CountLength),longcount);
+                            piece1.SetCountLength(enumlongcount);
+                        }
+                    }
+                    Debug.Log(piece1.GetLength());
                     break;
                 case PieceKind.Yellow:
                     piece1.SetKind(musicnote);
@@ -177,6 +189,16 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Green:
                     piece2.SetKind(longnote);
+                    foreach (var piece in board)
+                    {
+                        if(piece.deleteFlag)
+                        {
+                            longcount++;
+                            var enumlongcount = (CountLength)Enum.ToObject(typeof(CountLength),longcount);
+                            piece2.SetCountLength(enumlongcount);
+                        }
+                    }
+                    Debug.Log(piece2.GetLength());
                     break;
                 case PieceKind.Yellow:
                     piece2.SetKind(musicnote);
@@ -204,6 +226,16 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Green:
                     piece1.SetKind(longnote);
+                    foreach (var piece in board)
+                    {
+                        if(piece.deleteFlag)
+                        {
+                            longcount++;
+                            var enumlongcount = (CountLength)Enum.ToObject(typeof(CountLength),longcount);
+                            piece1.SetCountLength(enumlongcount);
+                        }
+                    }
+                    Debug.Log(piece1.GetLength());
                     break;
                 case PieceKind.Yellow:
                     piece1.SetKind(musicnote);
@@ -224,6 +256,16 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Green:
                     piece2.SetKind(longnote);
+                    foreach (var piece in board)
+                    {
+                        if(piece.deleteFlag)
+                        {
+                            longcount++;
+                            var enumlongcount = (CountLength)Enum.ToObject(typeof(CountLength),longcount);
+                            piece2.SetCountLength(enumlongcount);
+                        }
+                    }
+                    Debug.Log(piece2.GetLength());
                     break;
                 case PieceKind.Yellow:
                     piece2.SetKind(musicnote);

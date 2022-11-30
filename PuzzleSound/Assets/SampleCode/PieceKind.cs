@@ -24,3 +24,13 @@ public enum FlicDir
     dowm,
     nodir,
 }
+
+public enum CountLength
+{
+    zero = 0,
+    one,
+    two,
+    three,
+    four,
+    five,
+}
