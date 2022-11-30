@@ -201,11 +201,13 @@ public class GameManager : MonoBehaviour {
     {   
         board.BarMovePos(countdown);
         
-        if(Input.GetMouseButtonDown(0))//ここDowmだとまずいかも。
-        {
-            targetPiece = board.GetNearestPiece(Input.mousePosition);
-            board.MusicTap(targetPiece);//ノーツの行数の取得
-        }
+        // if(Input.GetMouseButtonDown(0))
+        // {
+        //     targetPiece = board.GetNearestPiece(Input.mousePosition);
+        // }
+
+        board.MusicTap();//ノーツの行数の取得
+        
 
         if(countdown <= 0 )
         {

@@ -22,6 +22,7 @@ public class Board : MonoBehaviour {
     private int BarYPos;
 
     private Vector2 TimingBarPos;
+    private Piece targetPiece;
 
 
     //-------------------------------------------------------
@@ -276,30 +277,70 @@ public class Board : MonoBehaviour {
     }
 
     //タップしたノーツの行数を取得する
-    public void MusicTap(Piece Tpiece)
+    public void MusicTap()
     {
-        var Tpos = GetPieceBoardPos(Tpiece);
-        //Debug.Log(Tpos);
-
+        bool isTap = false;
+        if(Input.GetMouseButtonDown(0))
+        {
+            targetPiece = GetNearestPiece(Input.mousePosition);
+            isTap = true;
+            Debug.Log(targetPiece.musicFlag);
+        }
+        
+        var Tpos = GetPieceBoardPos(targetPiece);
+        var kind = PieceKind.Red;
+        
+        if(isTap)
+        {
+            kind = targetPiece.GetKind();
+        }
         var ntap = PieceKind.TapNote;
         var nflic = PieceKind.FlicNote;
         var nlong = PieceKind.LongNote;
         var nmusic = PieceKind.MusicNote;
 
-        var kind = Tpiece.GetKind();
-
-        if(Tpiece != null &&　kind == ntap && Tpos.y == BarYPos)
+        if(targetPiece != null &&　kind == ntap && Tpos.y == BarYPos)
         { 
-            Tpiece.musicFlag = true;
-            Destroy(Tpiece.gameObject);
+            targetPiece.musicFlag = true;
+            //Destroy(Tpiece.gameObject);
             //もしpiece == nullなら、の条件分岐が必要。destroy後のpieceの無い部分をタップするとエラーが起こる。
         }
-        else if(Tpiece  == null)
+        if(targetPiece  == null)
         {
             
         }
-        Debug.Log(Tpiece.musicFlag);
     }
+
+    // public void MusicTap(Piece Tpiece)
+    // {
+    //     Tpiece = ;
+
+    //     if(tapnoteかつバーと座標一致なら)
+    //     {
+    //         T.piece.musicFlag = true;
+    //     }
+
+    //     if(flicnoteなら)
+    //     {
+    //         if(flicNoteCase())
+    //         {
+    //             musicflag = true;
+    //         }
+    //     }
+
+    //     if(longnoteなら)
+    //     {
+    //         if(LongNoteCase())
+    //         {
+
+    //         }
+    //     }
+
+    //     if(musicnoteなら)
+    //     {
+
+    //     }
+    // }
 
     public void DeleteNotes()
     {
@@ -443,5 +484,12 @@ public class Board : MonoBehaviour {
 
         // 有効なピースがなければ新しく作る
         CreatePiece(pos);
+    }
+
+    //長押しノーツの操作
+    private void LongNoteCase(Piece piece)
+    {
+        var pos = GetPieceBoardPos(piece);
+        var kind = piece.GetKind();
     }
 }
