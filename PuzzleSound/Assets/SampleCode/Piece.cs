@@ -15,6 +15,7 @@ public class Piece : MonoBehaviour
     private Image thisImage;
     private RectTransform thisRectTransform;
     private PieceKind kind;
+    private FlicDir fDir;
 
     //-------------------------------------------------------
     // MonoBehaviour Function
@@ -41,10 +42,21 @@ public class Piece : MonoBehaviour
         SetColor();
     }
 
+    //フリックノーツに方向をセットする
+    public void SetFlicDir(FlicDir flicDir)
+    {
+        fDir = flicDir;
+    }
+
     // ピースの種類を返す
     public PieceKind GetKind()
     {
         return kind;
+    }
+
+    public FlicDir GetDir()
+    {
+        return fDir;
     }
 
     // ピースのサイズをセットする

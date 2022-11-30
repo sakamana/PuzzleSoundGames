@@ -130,6 +130,7 @@ public class Board : MonoBehaviour {
     //ピースのKindをNoteに変更しフラグを削除
     public void CreateNotes(Piece piece1, Piece piece2)
     {
+        var flicd = (FlicDir)UnityEngine.Random.Range(0, Enum.GetNames(typeof(FlicDir)).Length);
         var tapnote = PieceKind.TapNote;
         var flicnote = PieceKind.FlicNote;
         var longnote = PieceKind.LongNote;
@@ -137,6 +138,7 @@ public class Board : MonoBehaviour {
         if(piece1.deleteFlag && !piece2.deleteFlag)//selectedPieceにフラグが立っている場合
         {
             piece1.deleteFlag = false;
+           
             //piece1.SetKind(note);
             switch(piece1.GetKind())
             {
@@ -145,6 +147,8 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Blue:
                     piece1.SetKind(flicnote);
+                    piece1.SetFlicDir(flicd);
+                    Debug.Log(piece1.GetDir());
                     break;
                 case PieceKind.Green:
                     piece1.SetKind(longnote);
@@ -168,6 +172,8 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Blue:
                     piece2.SetKind(flicnote);
+                    piece2.SetFlicDir(flicd);
+                    Debug.Log(piece2.GetDir());
                     break;
                 case PieceKind.Green:
                     piece2.SetKind(longnote);
@@ -193,6 +199,8 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Blue:
                     piece1.SetKind(flicnote);
+                    piece1.SetFlicDir(flicd);
+                    Debug.Log(piece1.GetDir());
                     break;
                 case PieceKind.Green:
                     piece1.SetKind(longnote);
@@ -211,6 +219,8 @@ public class Board : MonoBehaviour {
                     break;
                 case PieceKind.Blue:
                     piece2.SetKind(flicnote);
+                    piece2.SetFlicDir(flicd);
+                    Debug.Log(piece2.GetDir());
                     break;
                 case PieceKind.Green:
                     piece2.SetKind(longnote);

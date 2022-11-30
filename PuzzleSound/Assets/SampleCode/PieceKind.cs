@@ -15,3 +15,11 @@ public enum PieceKind
     LongNote,
     MusicNote,
 } 
+
+public enum FlicDir
+{
+    right = 0,
+    left,
+    up,
+    dowm,
+}
