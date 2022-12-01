@@ -354,12 +354,12 @@ public class Board : MonoBehaviour {
             isTap = false;
             //Debug.Log(direction);
         }
-        if(Input.GetMouseButton(0))
-        {
-            touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            GetDirection();//方向を取得
-            Debug.Log(direction);
-        }
+        // if(Input.GetMouseButton(0))
+        // {
+        //     touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        //     GetDirection();//方向を取得
+        //     Debug.Log(direction);
+        // }
         
         var Tpos = GetPieceBoardPos(targetPiece);
         var kind = PieceKind.Red; //一旦ノーツに関係ない属性で初期化してある
@@ -367,6 +367,9 @@ public class Board : MonoBehaviour {
         
         if(isTap)
         {
+            touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            GetDirection();//方向を取得
+            Debug.Log(direction);
             kind = targetPiece.GetKind();
         }
         var ntap = PieceKind.TapNote;
@@ -385,11 +388,11 @@ public class Board : MonoBehaviour {
             {
                 flicd = targetPiece.GetDir();
                 string flicdStr = flicd.ToString();
-                // if(direction == flicdStr)ここがうまくいってない
-                // {
+                if(direction == flicdStr)//ここがうまくいってない
+                {
                     targetPiece.musicFlag = true;
                     Debug.Log("ok" + flicdStr);
-                //}
+                }
             }
             else if(kind == nlong)
             {
