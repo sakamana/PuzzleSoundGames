@@ -393,7 +393,8 @@ public class Board : MonoBehaviour {
             }
             else if(kind == nlong)
             {
-
+                targetPiece.musicFlag = true;
+                Debug.Log(targetPiece.GetLength());
             }
             else if(kind == nmusic)
             {
