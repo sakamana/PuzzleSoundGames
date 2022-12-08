@@ -368,7 +368,7 @@ public class Board : MonoBehaviour {
             {
                 float longcheck = 0;
                 int longd = (int)targetPiece.GetLength();
-                if(Input.GetMouseButton(0))
+                if(Input.GetMouseButton(0))//長押し判定になってない
                 {
                     longcheck += Time.deltaTime;
                     if( longd < Tpos.y + 1 )
