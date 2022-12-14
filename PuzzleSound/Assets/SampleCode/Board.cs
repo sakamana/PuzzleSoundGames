@@ -30,6 +30,7 @@ public class Board : MonoBehaviour {
     private Vector2 touchUpPos;//現在の座標
     private string direction;//現在のタッチの状態を代入するstring
     private bool isTouch;//タッチされているかどうか
+    private string flicdStr;
 
 
     //-------------------------------------------------------
@@ -308,100 +309,94 @@ public class Board : MonoBehaviour {
     //タップしたノーツの行数を取得する
     public void MusicTap()
     {
-        bool isTap = false;
+        var kind = PieceKind.Red; //一旦ノーツに関係ない属性で初期化してある
         if(Input.GetMouseButtonDown(0))
         {
             targetPiece = GetNearestPiece(Input.mousePosition);
             touchStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            isTap = true;
-            //Debug.Log("start" + touchStartPos);
+            kind = targetPiece.GetKind();
         }
         if(Input.GetMouseButtonUp(0))
         {
             touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            Debug.Log("end" + touchUpPos);
-            GetDirection();//方向を取得
-            isTap = false;
-            Debug.Log(direction);
+            GetDirection();//フリックの方向を取得
+            Debug.Log("マウスの方向" + direction);
         }
-        // if(Input.GetMouseButton(0))
-        // {
-        //     // touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        //     // GetDirection();//方向を取得
-        //     // Debug.Log(direction);
-        // }
-        
         var Tpos = GetPieceBoardPos(targetPiece);
-        var kind = PieceKind.Red; //一旦ノーツに関係ない属性で初期化してある
         var flicd = FlicDir.nodir;
         
-        if(isTap)
-        {
-            // touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            // GetDirection();//方向を取得
-            // Debug.Log(direction);
-            kind = targetPiece.GetKind();
-        }
-        var ntap = PieceKind.TapNote;
-        var nflic = PieceKind.FlicNote;
-        var nlong = PieceKind.LongNote;
-        var nmusic = PieceKind.MusicNote;
+        bool flicnow = false;
+        bool mousedownlong = false;
 
         if(targetPiece != null && Tpos.y == BarYPos)
         { 
-            if(kind == ntap)
+            switch(kind)
             {
-                targetPiece.musicFlag = true;
-                
-            }
-            else if(kind == nflic)
-            {
-                flicd = targetPiece.GetDir();
-                string flicdStr = flicd.ToString();
-                if(direction == flicdStr)//ここがうまくいってない
-                {
+                case PieceKind.TapNote:
                     targetPiece.musicFlag = true;
-                    Debug.Log("ok" + flicdStr);
-                }
-            }
-            else if(kind == nlong)
-            {
-                float longcheck = 0;
-                int longd = (int)targetPiece.GetLength();
-                if(Input.GetMouseButton(0))//長押し判定になってない
-                {
-                    longcheck += Time.deltaTime;
-                    if( longd < Tpos.y + 1 )
+                    Debug.Log("赤色true");
+                    break;
+
+                case PieceKind.FlicNote:
+                    flicnow = true;
+
+                    flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
+                    flicdStr = flicd.ToString();//取得した方向をstringに変換
+
+                    break;
+
+                case PieceKind.LongNote:
+                    float longcheck = 0;
+                    int longd = (int)targetPiece.GetLength();
+                    if(Input.GetMouseButton(0))//長押し判定になってない
                     {
-                        if(  longd <= longcheck )
+                        longcheck += Time.deltaTime;
+                        if( longd < Tpos.y + 1 )
                         {
-                            targetPiece.musicFlag = true;
-                            Debug.Log(targetPiece.GetLength() + "そのまま" + longcheck);
+                            if(  longd <= longcheck )
+                            {
+                                targetPiece.musicFlag = true;
+                                Debug.Log(targetPiece.GetLength() + "そのまま" + longcheck);
+                            }
                         }
-                    }
-                    else if( longd >= Tpos.y + 1 )
-                    {
-                        if(  Tpos.y + 1 <= longcheck )
+                        else if( longd >= Tpos.y + 1 )
                         {
-                            targetPiece.musicFlag = true;
-                            Debug.Log(targetPiece.GetLength() + "高さ" + longcheck);
-                        }
+                            if(  Tpos.y + 1 <= longcheck )
+                            {
+                                targetPiece.musicFlag = true;
+                                Debug.Log(targetPiece.GetLength() + "高さ" + longcheck);
+                            }
+                        }  
+                        Debug.Log(longcheck);
                     }
-                    Debug.Log(longcheck);
-                }
-            }
-            else if(kind == nmusic)
-            {
+                    break;
+
+                case PieceKind.MusicNote:
+                    break;
+
+                default:
+                    break;
 
             }
             
-            //Destroy(Tpiece.gameObject);
-            //もしpiece == nullなら、の条件分岐が必要。destroy後のpieceの無い部分をタップするとエラーが起こる。
+            if(Input.GetMouseButtonUp(0))
+            {
+                Debug.Log("agari" + direction);
+                if(flicnow && flicdStr == direction)
+                {
+                    targetPiece.musicFlag = true;
+                    Debug.Log("青色true");
+                    flicnow = false;
+                }
+            }
         }
         if(targetPiece  == null)
         {
             
         }
+        
+
+        
     }
 
     public void DeleteNotes()
