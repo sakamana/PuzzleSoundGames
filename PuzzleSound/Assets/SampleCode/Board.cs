@@ -29,8 +29,6 @@ public class Board : MonoBehaviour {
     private Vector2 touchStartPos;//画面タップ開始地点の座標
     private Vector2 touchUpPos;//現在の座標
     private string direction;//現在のタッチの状態を代入するstring
-    private bool isTouch;//タッチされているかどうか
-    private string flicdStr;
 
 
     //-------------------------------------------------------
@@ -323,13 +321,12 @@ public class Board : MonoBehaviour {
             Debug.Log("マウスの方向" + direction);
         }
         var Tpos = GetPieceBoardPos(targetPiece);
-        var flicd = FlicDir.nodir;
-        
-        bool flicnow = false;
-        bool mousedownlong = false;
 
         if(targetPiece != null && Tpos.y == BarYPos)
         { 
+            bool flicnow = false;
+            bool longnow = false;
+            string flicdStr;
             switch(kind)
             {
                 case PieceKind.TapNote:
@@ -340,7 +337,7 @@ public class Board : MonoBehaviour {
                 case PieceKind.FlicNote:
                     flicnow = true;
 
-                    flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
+                    var flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
                     flicdStr = flicd.ToString();//取得した方向をstringに変換
 
                     break;
@@ -379,15 +376,21 @@ public class Board : MonoBehaviour {
 
             }
             
-            if(Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonUp(0))//機能してる----------------------------
             {
-                Debug.Log("agari" + direction);
-                if(flicnow && flicdStr == direction)
+                Debug.Log("agari" + direction + flicnow);
+                if(flicnow)//機能してない(ずっとfalseになっている)-----------------------------------------
                 {
-                    targetPiece.musicFlag = true;
                     Debug.Log("青色true");
+                    targetPiece.musicFlag = true;
                     flicnow = false;
                 }
+                // if(flicnow && flicdStr == direction)
+                // {
+                //     targetPiece.musicFlag = true;
+                //     Debug.Log("青色true");
+                //     flicnow = false;
+                // }
             }
         }
         if(targetPiece  == null)
