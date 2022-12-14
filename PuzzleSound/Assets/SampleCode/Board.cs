@@ -29,6 +29,7 @@ public class Board : MonoBehaviour {
     private Vector2 touchStartPos;//画面タップ開始地点の座標
     private Vector2 touchUpPos;//現在の座標
     private string direction;//現在のタッチの状態を代入するstring
+    private PieceKind kind;
 
 
     //-------------------------------------------------------
@@ -304,10 +305,8 @@ public class Board : MonoBehaviour {
         }
     }
 
-    //タップしたノーツの行数を取得する
     public void MusicTap()
     {
-        var kind = PieceKind.Red; //一旦ノーツに関係ない属性で初期化してある
         if(Input.GetMouseButtonDown(0))
         {
             targetPiece = GetNearestPiece(Input.mousePosition);
@@ -333,15 +332,6 @@ public class Board : MonoBehaviour {
                     targetPiece.musicFlag = true;
                     Debug.Log("赤色true");
                     break;
-
-                case PieceKind.FlicNote:
-                    flicnow = true;
-
-                    var flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
-                    flicdStr = flicd.ToString();//取得した方向をstringに変換
-
-                    break;
-
                 case PieceKind.LongNote:
                     float longcheck = 0;
                     int longd = (int)targetPiece.GetLength();
@@ -376,21 +366,22 @@ public class Board : MonoBehaviour {
 
             }
             
-            if(Input.GetMouseButtonUp(0))//機能してる----------------------------
+            if(Input.GetMouseButtonUp(0))
             {
-                Debug.Log("agari" + direction + flicnow);
-                if(flicnow)//機能してない(ずっとfalseになっている)-----------------------------------------
+                switch(kind)
                 {
-                    Debug.Log("青色true");
-                    targetPiece.musicFlag = true;
-                    flicnow = false;
+                    case PieceKind.FlicNote:
+                        var flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
+                        flicdStr = flicd.ToString();//取得した方向をstringに変換
+                        if(direction == flicdStr)
+                        {
+                            targetPiece.musicFlag = true;
+                            Debug.Log("青色true");
+                        }
+                        break;
+                    default:
+                        break;
                 }
-                // if(flicnow && flicdStr == direction)
-                // {
-                //     targetPiece.musicFlag = true;
-                //     Debug.Log("青色true");
-                //     flicnow = false;
-                // }
             }
         }
         if(targetPiece  == null)
@@ -408,12 +399,19 @@ public class Board : MonoBehaviour {
         var nflic = PieceKind.FlicNote;
         var nlong = PieceKind.LongNote;
         var nmusic = PieceKind.MusicNote;
+
+        int truecount = 0;
         // 削除フラグが立っているノーツを削除する
         foreach (var piece in board)
         {
             var kind = piece.GetKind();
             if (piece != null && (kind == ntap || kind == nflic || kind == nlong || kind == nmusic))
             {
+                if(piece.musicFlag)
+                {
+                    truecount++;
+                    Debug.Log(truecount);
+                }
                 Destroy(piece.gameObject);
             }
         }
