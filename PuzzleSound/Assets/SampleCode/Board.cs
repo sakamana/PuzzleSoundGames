@@ -31,6 +31,7 @@ public class Board : MonoBehaviour {
     private string direction;
     private PieceKind kind;
     private bool touchnow;
+    private int longd;
 
 
     //-------------------------------------------------------
@@ -313,19 +314,19 @@ public class Board : MonoBehaviour {
             targetPiece = GetNearestPiece(Input.mousePosition);
             touchStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             kind = targetPiece.GetKind();
-            touchnow = true;
         }
         if(Input.GetMouseButtonUp(0))
         {
             touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             GetDirection();//フリックの方向を取得
             Debug.Log("マウスの方向" + direction);
+            touchnow = false;
         }
         var Tpos = GetPieceBoardPos(targetPiece);
 
+        
         if(targetPiece != null && Tpos.y == BarYPos)
-        { 
-            bool longnow = false;
+        {
             string flicdStr;
             switch(kind)
             {
@@ -384,6 +385,40 @@ public class Board : MonoBehaviour {
                         break;
                 }
             }
+        }
+        if(Tpos.y == BarYPos && kind == PieceKind.LongNote)
+        {
+            longd = (int)targetPiece.GetLength();
+            touchnow = true;
+            Debug.Log(longd);
+        }
+        if(touchnow)
+        {
+            targetPiece.longdowncount += Time.deltaTime;
+            //Debug.Log(targetPiece.longdowncount);
+
+            if(targetPiece.longdowncount >= longd)
+            {
+                 Debug.Log("こえた");
+                targetPiece.musicFlag = true;
+            }
+
+            // if( longd < Tpos.y + 1 )
+            // {
+            //     if(  longd <= longcheck )
+            //     {
+            //         targetPiece.musicFlag = true;
+            //         //Debug.Log(targetPiece.GetLength() + "そのまま" + longcheck);
+            //     }
+            // }
+            // else if( longd >= Tpos.y + 1 )
+            // {
+            //     if(  Tpos.y + 1 <= longcheck )
+            //     {
+            //         targetPiece.musicFlag = true;
+            //         //Debug.Log(targetPiece.GetLength() + "高さ" + longcheck);
+            //     }
+            // } 
         }
         if(targetPiece  == null)
         {

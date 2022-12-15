@@ -11,6 +11,8 @@ public class Piece : MonoBehaviour
     public bool deleteFlag;
     public bool musicFlag;
 
+    public float longdowncount;
+
     // private.
     private Image thisImage;
     private RectTransform thisRectTransform;
@@ -31,6 +33,8 @@ public class Piece : MonoBehaviour
         // フラグを初期化
         deleteFlag = false;
         musicFlag = false;
+
+        longdowncount = 0;
     }
 
     //-------------------------------------------------------
