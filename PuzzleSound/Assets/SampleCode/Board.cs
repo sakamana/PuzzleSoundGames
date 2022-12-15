@@ -26,10 +26,11 @@ public class Board : MonoBehaviour {
     //MusicTapの者達
     private Piece targetPiece;
 
-    private Vector2 touchStartPos;//画面タップ開始地点の座標
-    private Vector2 touchUpPos;//現在の座標
-    private string direction;//現在のタッチの状態を代入するstring
+    private Vector2 touchStartPos;
+    private Vector2 touchUpPos;
+    private string direction;
     private PieceKind kind;
+    private bool touchnow;
 
 
     //-------------------------------------------------------
@@ -312,6 +313,7 @@ public class Board : MonoBehaviour {
             targetPiece = GetNearestPiece(Input.mousePosition);
             touchStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             kind = targetPiece.GetKind();
+            touchnow = true;
         }
         if(Input.GetMouseButtonUp(0))
         {
