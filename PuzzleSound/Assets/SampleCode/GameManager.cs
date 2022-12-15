@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
     public float countdown;
     public int countdownTriger = 0;
 
+    public static int score;
+
     // enum.
     private enum GameState
     {
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour {
     private Board board;
     [SerializeField]
     private Text stateText;
+    [SerializeField]
+    private Text scoreText;
 
     // private.
     private GameState currentState;
@@ -121,6 +125,7 @@ public class GameManager : MonoBehaviour {
             currentState = GameState.Idle;
         }
         stateText.text = currentState.ToString();
+        scoreText.text = score.ToString();
     }
 
     //-------------------------------------------------------

@@ -397,7 +397,7 @@ public class Board : MonoBehaviour {
         var nlong = PieceKind.LongNote;
         var nmusic = PieceKind.MusicNote;
 
-        int truecount = 0;
+        //int truecount = 0;
         // 削除フラグが立っているノーツを削除する
         foreach (var piece in board)
         {
@@ -406,8 +406,8 @@ public class Board : MonoBehaviour {
             {
                 if(piece.musicFlag)
                 {
-                    truecount++;
-                    Debug.Log(truecount);
+                    GameManager.score++;
+                    //Debug.Log(truecount);
                 }
                 Destroy(piece.gameObject);
             }
