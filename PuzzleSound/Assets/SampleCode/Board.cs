@@ -257,6 +257,7 @@ public class Board : MonoBehaviour {
         {
             if (piece != null && piece.deleteFlag)
             {
+                GameManager.score++;
                 Destroy(piece.gameObject);
             }
         }
