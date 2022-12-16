@@ -39,6 +39,10 @@ public class Piece : MonoBehaviour
         deleteFlag = false;
         musicFlag = false;
 
+        musicGood = false;
+        musicGreat = false;
+        musicPerfect = false;
+
         longdowncount = 0;
     }
 
