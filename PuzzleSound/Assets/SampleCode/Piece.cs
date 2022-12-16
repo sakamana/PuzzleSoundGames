@@ -11,6 +11,11 @@ public class Piece : MonoBehaviour
     public bool deleteFlag;
     public bool musicFlag;
 
+    //音ゲー判定用bool
+    public bool musicGood;
+    public bool musicGreat;
+    public bool musicPerfect;
+
     public float longdowncount;
 
     // private.
