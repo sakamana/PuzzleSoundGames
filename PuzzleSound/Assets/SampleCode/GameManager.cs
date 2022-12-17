@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     // enum.
     private enum GameState
     {
+        Wait,
         Idle,
         PieceMove,
         MatchCheck,
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour {
         {
             switch (currentState)
             {
+                
                 case GameState.Idle:
                     Idle();
                     break;
@@ -87,6 +89,8 @@ public class GameManager : MonoBehaviour {
                     break;
                 case GameState.DeleteNotes:
                     DeleteNotes();
+                    break;
+                case GameState.Wait:
                     break;
                 default:
                     break;
@@ -190,16 +194,20 @@ public class GameManager : MonoBehaviour {
     //フラグの立ったピース削除
     private void DeletePiece()
     {
-        board.DeletePiece();
-        currentState = GameState.FillPiece;
+        //board.DeletePiece();
+        //currentState = GameState.FillPiece;
+        currentState = GameState.Wait;
+        StartCoroutine(board.DeletePiece(() => currentState = GameState.FillPiece));
     }
 
 
     // 盤面上のかけている部分にピースを補充する
     private void FillPiece()
     {
-        board.FillPiece();
-        currentState = GameState.MatchCheck;
+        //board.FillPiece();
+        //currentState = GameState.MatchCheck;
+        currentState = GameState.Wait;
+        StartCoroutine(board.FillPiece(() => currentState = GameState.MatchCheck));
     }
 
     private void MusicTap()
@@ -223,6 +231,7 @@ public class GameManager : MonoBehaviour {
     private void DeleteNotes()
     {
         board.DeleteNotes();
-        board.FillPiece();
+        //board.FillPiece();
+        StartCoroutine(board.FillPiece(() => currentState = GameState.MatchCheck));
     }
 }

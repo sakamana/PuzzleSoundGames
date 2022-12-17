@@ -249,7 +249,7 @@ public class Board : MonoBehaviour {
         }
     }
 
-    public void DeletePiece()
+    public IEnumerator DeletePiece(Action endCallBadk)
     {
         
         // 削除フラグが立っているオブジェクトを削除する
@@ -261,6 +261,8 @@ public class Board : MonoBehaviour {
                 Destroy(piece.gameObject);
             }
         }
+        yield return new WaitForSeconds(0.5f);
+        endCallBadk();
     }
 
     public void BarMovePos(float countd)
@@ -417,7 +419,7 @@ public class Board : MonoBehaviour {
     }
 
     // ピースが消えている場所を詰めて、新しいピースを生成する
-    public void FillPiece()
+    public IEnumerator FillPiece(Action endCallBack)
     {
         for (int i = 0; i < width; i++)
         {
@@ -426,6 +428,8 @@ public class Board : MonoBehaviour {
                 FillPiece(new Vector2(i, j));
             }
         }
+        yield return new WaitForSeconds(0.5f);
+        endCallBack();
     }
 
     //-------------------------------------------------------
