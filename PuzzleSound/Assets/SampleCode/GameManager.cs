@@ -107,6 +107,8 @@ public class GameManager : MonoBehaviour {
                 case GameState.DeleteNotes:
                     DeleteNotes();
                     break;
+                case GameState.Wait:
+                    break;
                 default:
                     break;
             }
@@ -220,7 +222,8 @@ public class GameManager : MonoBehaviour {
         // }
 
         board.MusicTap();//ノーツの行数の取得
-        
+        currentState = GameState.Wait;//この2行で音ゲー時にnullのピースが発生しないようにできているかわからない
+        StartCoroutine(board.FillPiece(() => currentState = GameState.MatchCheck));
 
         if(countdown <= 0 )
         {

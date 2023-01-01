@@ -5,6 +5,9 @@ using UnityEngine;
 
 // 盤面クラス
 public class Board : MonoBehaviour {
+    //const
+    private const float FillPieceDuration = 0.2f;
+    private const float SwitchPieceCuration = 0.02f;
 
     // serialize field.
     [SerializeField]
@@ -20,9 +23,12 @@ public class Board : MonoBehaviour {
     private int timingBarWidth;
     private int randomSeed;
     private int BarYPos;
-
     private Vector2 TimingBarPos;
-    
+
+    private Vector2[] directions = new Vector2[] { Vector2.up, Vector2.down, Vector2.right, Vector2.left };
+    private List<AnimData> fillPieceAnim = new List<AnimData>();
+    private List<Vector2> pieceCreatePos = new List<Vector2>();
+
     //MusicTapの者達
     private Piece targetPiece;
 
@@ -60,6 +66,8 @@ public class Board : MonoBehaviour {
                 CreatePiece(new Vector2(i, j));
             }
         }
+
+        animManager.AddListAnimData(fillPieceAnim);
     }
     
     // 入力されたクリック(タップ)位置から最も近いピースの位置を返す
