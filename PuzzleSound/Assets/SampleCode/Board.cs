@@ -67,7 +67,7 @@ public class Board : MonoBehaviour {
             }
         }
 
-        animManager.AddListAnimData(fillPieceAnim);
+        //animManager.AddListAnimData(fillPieceAnim);
     }
     
     // 入力されたクリック(タップ)位置から最も近いピースの位置を返す
