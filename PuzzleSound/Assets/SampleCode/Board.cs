@@ -6,8 +6,13 @@ using UnityEngine;
 // 盤面クラス
 public class Board : MonoBehaviour {
 
-    AudioSource audioSource;  // SE関連
-    public List<AudioClip> audioClip = new List<AudioClip>();  // SE関連
+    AudioSource audioSource;// SE関連
+    public AudioClip sound1;// SE関連
+    public AudioClip sound2;// SE関連
+    public AudioClip sound3;// SE関連
+    public AudioClip sound4;// SE関連
+    public AudioClip sound5;// SE関連
+    public AudioClip sound6;// SE関連
 
     //const
     private const float FillPieceDuration = 0.2f;
@@ -45,7 +50,7 @@ public class Board : MonoBehaviour {
     
     void Start ()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();  //SE関連
+        audioSource = GetComponent<AudioSource>();  //SE関連
     }
 
     //-------------------------------------------------------
@@ -354,26 +359,26 @@ public class Board : MonoBehaviour {
                     switch(Tpos.x)
                     {
                         case 0:
-                            audioSource.PlayOneShot(audioClip[0]);
+                            audioSource.PlayOneShot(sound1);
                             Debug.Log("ド");
                             break;
                         case 1:
-                            audioSource.PlayOneShot(audioClip[1]);
+                            audioSource.PlayOneShot(sound2);
                             Debug.Log("レ");
                             break;
                         case 2:
-                            audioSource.PlayOneShot(audioClip[2]);
+                            audioSource.PlayOneShot(sound3);
                             Debug.Log("ミ");
                             break;
                         case 3:
-                            audioSource.PlayOneShot(audioClip[3]);
+                            audioSource.PlayOneShot(sound4);
                             Debug.Log("ファ");
                             break;
                         case 4:
-                            audioSource.PlayOneShot(audioClip[4]);
+                            audioSource.PlayOneShot(sound5);
                             break;
                         case 5:
-                            audioSource.PlayOneShot(audioClip[5]);
+                            audioSource.PlayOneShot(sound6);
                             break;
                         default:
                             break;
