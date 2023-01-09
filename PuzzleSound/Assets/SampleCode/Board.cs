@@ -5,6 +5,10 @@ using UnityEngine;
 
 // 盤面クラス
 public class Board : MonoBehaviour {
+
+    AudioSource audioSource;  // SE関連
+    public List<AudioClip> audioClip = new List<AudioClip>();  // SE関連
+
     //const
     private const float FillPieceDuration = 0.2f;
     private const float SwitchPieceCuration = 0.02f;
@@ -38,7 +42,11 @@ public class Board : MonoBehaviour {
     private PieceKind kind;
     private bool touchnow;
     private int longd;
-
+    
+    void Start ()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();  //SE関連
+    }
 
     //-------------------------------------------------------
     // Public Function
