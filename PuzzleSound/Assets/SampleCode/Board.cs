@@ -350,9 +350,38 @@ public class Board : MonoBehaviour {
             switch(kind)
             {
                 case PieceKind.TapNote:
+                {
+                    switch(Tpos.x)
+                    {
+                        case 0:
+                            audioSource.PlayOneShot(audioClip[0]);
+                            Debug.Log("ド");
+                            break;
+                        case 1:
+                            audioSource.PlayOneShot(audioClip[1]);
+                            Debug.Log("レ");
+                            break;
+                        case 2:
+                            audioSource.PlayOneShot(audioClip[2]);
+                            Debug.Log("ミ");
+                            break;
+                        case 3:
+                            audioSource.PlayOneShot(audioClip[3]);
+                            Debug.Log("ファ");
+                            break;
+                        case 4:
+                            audioSource.PlayOneShot(audioClip[4]);
+                            break;
+                        case 5:
+                            audioSource.PlayOneShot(audioClip[5]);
+                            break;
+                        default:
+                            break;
+                    }
                     targetPiece.musicFlag = true;
                     Debug.Log("赤色true");
                     break;
+                }
                 case PieceKind.MusicNote:
                     break;
                 default:
