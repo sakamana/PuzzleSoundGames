@@ -358,6 +358,7 @@ public class Board : MonoBehaviour {
                 {
                     if(Input.GetMouseButtonDown(0))
                     {
+                        //このswich文で行によって違う音を鳴らしたいです---------------------------------------------------------------------
                         switch(Tpos.x)
                         {
                             case 0:
