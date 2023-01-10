@@ -59,6 +59,7 @@ public class Board : MonoBehaviour {
     // 特定の幅と高さに盤面を初期化する/TimingBarの位置と大きさを初期化
     public void InitializeBoard(int boardWidth, int boardHeight)
     {
+        
         width = boardWidth;
         height = boardHeight;
 
