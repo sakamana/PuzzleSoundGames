@@ -356,32 +356,35 @@ public class Board : MonoBehaviour {
             {
                 case PieceKind.TapNote:
                 {
-                    switch(Tpos.x)
+                    if(Input.GetMouseButtonDown(0))
                     {
-                        case 0:
-                            audioSource.PlayOneShot(sound1);
-                            Debug.Log("ド");
-                            break;
-                        case 1:
-                            audioSource.PlayOneShot(sound2);
-                            Debug.Log("レ");
-                            break;
-                        case 2:
-                            audioSource.PlayOneShot(sound3);
-                            Debug.Log("ミ");
-                            break;
-                        case 3:
-                            audioSource.PlayOneShot(sound4);
-                            Debug.Log("ファ");
-                            break;
-                        case 4:
-                            audioSource.PlayOneShot(sound5);
-                            break;
-                        case 5:
-                            audioSource.PlayOneShot(sound6);
-                            break;
-                        default:
-                            break;
+                        switch(Tpos.x)
+                        {
+                            case 0:
+                                audioSource.PlayOneShot(sound1);
+                                Debug.Log("ド");
+                                break;
+                            case 1:
+                                audioSource.PlayOneShot(sound2);
+                                Debug.Log("レ");
+                                break;
+                            case 2:
+                                audioSource.PlayOneShot(sound3);
+                                Debug.Log("ミ");
+                                break;
+                            case 3:
+                                audioSource.PlayOneShot(sound4);
+                                Debug.Log("ファ");
+                                break;
+                            case 4:
+                                audioSource.PlayOneShot(sound5);
+                                break;
+                            case 5:
+                                audioSource.PlayOneShot(sound6);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     targetPiece.musicFlag = true;
                     Debug.Log("赤色true");
