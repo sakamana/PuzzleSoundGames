@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour {
     {
         board.InitializeBoard(6, 8);
         currentState = GameState.Idle;
+        //audioSource = GetComponent<AudioSource>();  //SE関連
     }
 
     // ゲームのメインループ
