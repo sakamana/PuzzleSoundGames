@@ -356,8 +356,8 @@ public class Board : MonoBehaviour {
             {
                 case PieceKind.TapNote:
                 {
-                    if(Input.GetMouseButtonDown(0))
-                    {
+                    //if(Input.GetMouseButtonDown(0))　複数回数呼び出されることが原因かと思ってクリックした瞬間の指定をしたけど、音が鳴らなかった。
+                    //{
                         //このswich文で行によって違う音を鳴らしたいです---------------------------------------------------------------------
                         switch(Tpos.x)
                         {
@@ -386,7 +386,7 @@ public class Board : MonoBehaviour {
                             default:
                                 break;
                         }
-                    }
+                    //}
                     targetPiece.musicFlag = true;
                     Debug.Log("赤色true");
                     break;
