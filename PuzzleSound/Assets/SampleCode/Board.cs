@@ -357,26 +357,21 @@ public class Board : MonoBehaviour {
             {
                 case PieceKind.TapNote:
                 {
-                    if(Input.GetMouseButtonDown(0))　//複数回数呼び出されることが原因かと思ってクリックした瞬間の指定をしたけど、音が鳴らなかった。
+                    if(Input.GetMouseButtonDown(0))
                     {
-                        //このswich文で行によって違う音を鳴らしたいです---------------------------------------------------------------------
                         switch(Tpos.x)
                         {
                             case 0:
                                 audioSource.PlayOneShot(sound1);
-                                Debug.Log("ド");
                                 break;
                             case 1:
                                 audioSource.PlayOneShot(sound2);
-                                Debug.Log("レ");
                                 break;
                             case 2:
                                 audioSource.PlayOneShot(sound3);
-                                Debug.Log("ミ");
                                 break;
                             case 3:
                                 audioSource.PlayOneShot(sound4);
-                                Debug.Log("ファ");
                                 break;
                             case 4:
                                 audioSource.PlayOneShot(sound5);
@@ -404,14 +399,39 @@ public class Board : MonoBehaviour {
                 switch(kind)
                 {
                     case PieceKind.FlicNote:
+                    {
                         var flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
                         flicdStr = flicd.ToString();//取得した方向をstringに変換
                         if(direction == flicdStr)
                         {
+                            switch(Tpos.x)
+                            {
+                            case 0:
+                                audioSource.PlayOneShot(sound1);
+                                break;
+                            case 1:
+                                audioSource.PlayOneShot(sound2);
+                                break;
+                            case 2:
+                                audioSource.PlayOneShot(sound3);
+                                break;
+                            case 3:
+                                audioSource.PlayOneShot(sound4);
+                                break;
+                            case 4:
+                                audioSource.PlayOneShot(sound5);
+                                break;
+                            case 5:
+                                audioSource.PlayOneShot(sound6);
+                                break;
+                            default:
+                                break;
+                            }
                             targetPiece.musicFlag = true;
                             Debug.Log("青色true");
                         }
                         break;
+                    }
                     default:
                         break;
                 }
@@ -421,12 +441,36 @@ public class Board : MonoBehaviour {
         {
             longd = (int)targetPiece.GetLength();
             touchnow = true;
-            //Debug.Log(longd);
+            if(Input.GetMouseButtonDown(0))
+                    {
+                        switch(Tpos.x)
+                        {
+                            case 0:
+                                audioSource.PlayOneShot(sound1);
+                                break;
+                            case 1:
+                                audioSource.PlayOneShot(sound2);
+                                break;
+                            case 2:
+                                audioSource.PlayOneShot(sound3);
+                                break;
+                            case 3:
+                                audioSource.PlayOneShot(sound4);
+                                break;
+                            case 4:
+                                audioSource.PlayOneShot(sound5);
+                                break;
+                            case 5:
+                                audioSource.PlayOneShot(sound6);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
         }
         if(touchnow)
         {
             targetPiece.longdowncount += Time.deltaTime;
-            //Debug.Log(targetPiece.longdowncount);
 
             if(targetPiece.longdowncount >= longd)
             {
