@@ -11,6 +11,19 @@ public class Piece : MonoBehaviour
     public bool deleteFlag;
     public bool musicFlag;
 
+    //フリック方向用スプライト 
+    public Sprite rightImg;
+    public Sprite leftImg;
+    public Sprite upImg;
+    public Sprite downImg;
+
+    //長押し拍数用スプライト
+    public Sprite oneImg;
+    public Sprite twoImg;
+    public Sprite threeImg;
+    public Sprite fourImg;
+    public Sprite fiveImg;
+
     //音ゲー判定用bool
     public bool musicGood;
     public bool musicGreat;
@@ -66,6 +79,23 @@ public class Piece : MonoBehaviour
     public void SetFlicDir(FlicDir flicDir)
     {
         fDir = flicDir;
+        switch(fDir)
+        {
+            case FlicDir.right:
+                this.gameObject.GetComponent<Image> ().sprite = rightImg;
+                break;
+            case FlicDir.left:
+                this.gameObject.GetComponent<Image> ().sprite = leftImg;
+                break;
+            case FlicDir.up:
+                this.gameObject.GetComponent<Image> ().sprite = upImg;
+                break;
+            case FlicDir.dowm:
+                this.gameObject.GetComponent<Image> ().sprite = downImg;
+                break;
+            default:
+                break;
+        }
     }
 
     //方向を返す
@@ -78,6 +108,26 @@ public class Piece : MonoBehaviour
     public void SetCountLength(CountLength clength)
     {
         notelength = clength;
+        switch(clength)
+        {
+            case CountLength.one:
+                this.gameObject.GetComponent<Image> ().sprite = oneImg;
+                break;
+            case CountLength.two:
+                this.gameObject.GetComponent<Image> ().sprite = twoImg;
+                break;
+            case CountLength.three:
+                this.gameObject.GetComponent<Image> ().sprite = threeImg;
+                break;
+            case CountLength.four:
+                this.gameObject.GetComponent<Image> ().sprite = fourImg;
+                break;
+            case CountLength.five:
+                this.gameObject.GetComponent<Image> ().sprite = fiveImg;
+                break;
+            default:
+                break;
+        }
     }
 
     //longノーツの秒数を返す
@@ -136,5 +186,6 @@ public class Piece : MonoBehaviour
             default:
                 break;
         }
+        
     }
 }
