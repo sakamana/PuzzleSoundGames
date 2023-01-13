@@ -216,12 +216,6 @@ public class GameManager : MonoBehaviour {
     private void MusicTap()
     {   
         board.BarMovePos(countdown);
-        
-        // if(Input.GetMouseButtonDown(0))
-        // {
-        //     targetPiece = board.GetNearestPiece(Input.mousePosition);
-        // }
-
         board.MusicTap();//ノーツの行数の取得
         currentState = GameState.Wait;//この2行で音ゲー時にnullのピースが発生しないようにできているかわからない
         StartCoroutine(board.FillPiece(() => currentState = GameState.MatchCheck));
@@ -235,7 +229,6 @@ public class GameManager : MonoBehaviour {
     private void DeleteNotes()
     {
         board.DeleteNotes();
-        //board.FillPiece();
         StartCoroutine(board.FillPiece(() => currentState = GameState.MatchCheck));
     }
 }
