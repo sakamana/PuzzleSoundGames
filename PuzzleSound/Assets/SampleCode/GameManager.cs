@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     {
         Wait,
         Idle,
-        PieceMove,
+        //PieceMove,
         MatchCheck,
         DeleteCheck,
         CreateNotes,
@@ -70,9 +70,9 @@ public class GameManager : MonoBehaviour {
                 case GameState.Idle:
                     Idle();
                     break;
-                case GameState.PieceMove:
-                    PieceMove();
-                    break;
+                //case GameState.PieceMove:
+                    //PieceMove();
+                    //break;
                 case GameState.MatchCheck:
                     MatchCheck();
                     break;
@@ -150,7 +150,17 @@ public class GameManager : MonoBehaviour {
             {
                 case TouchPhase.Began:
                     selectedPiece = board.GetNearestPiece(touch.position);
-                    currentState = GameState.PieceMove;
+                    break;
+                case TouchPhase.Moved:
+                    NextPiece = board.GetNearestPiece(touch.position);
+                    if (NextPiece != selectedPiece)
+                    {
+                        board.SwitchPiece(selectedPiece, NextPiece);
+                        currentState = GameState.MatchCheck;
+                    }
+                    break;
+                case TouchPhase.Ended:
+                    currentState = GameState.MatchCheck;
                     break;
                 default:
                     break;
@@ -166,30 +176,30 @@ public class GameManager : MonoBehaviour {
     }
 
     // プレイヤーがピースを選択しているときの処理
-    private void PieceMove()
-    {
-        //------------------------------------------------------------------------------
-        var touchCount = Input.touchCount;
-        for (var i = 0; i < touchCount; i++)
-        {
-            var touch = Input.GetTouch(i);
-            switch(touch.phase)
-            {
-                case TouchPhase.Moved:
-                    NextPiece = board.GetNearestPiece(touch.position);//ピースに最短距離のピースを代入
-                    if (NextPiece != selectedPiece)//最短距離のピースと、選択したピースが不一致
-                    {
-                        board.SwitchPiece(selectedPiece, NextPiece);//選択したピースと、場所入れ替え
-                        currentState = GameState.MatchCheck;
-                    }
-                    break;
-                    case TouchPhase.Ended:
-                        currentState = GameState.MatchCheck;
-                    break;
-                default:
-                    break;
-            }
-        }
+    // private void PieceMove()
+    // {
+    //     //------------------------------------------------------------------------------
+    //     var touchCount = Input.touchCount;
+    //     for (var i = 0; i < touchCount; i++)
+    //     {
+    //         var touch = Input.GetTouch(i);
+    //         switch(touch.phase)
+    //         {
+    //             case TouchPhase.Moved:
+    //                 NextPiece = board.GetNearestPiece(touch.position);//ピースに最短距離のピースを代入
+    //                 if (NextPiece != selectedPiece)//最短距離のピースと、選択したピースが不一致
+    //                 {
+    //                     board.SwitchPiece(selectedPiece, NextPiece);//選択したピースと、場所入れ替え
+    //                     currentState = GameState.MatchCheck;
+    //                 }
+    //                 break;
+    //                 case TouchPhase.Ended:
+    //                     currentState = GameState.MatchCheck;
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     }
         //------------------------------------------------------------------------------
         // if (Input.GetMouseButton(0))
         // {
@@ -204,7 +214,7 @@ public class GameManager : MonoBehaviour {
         // {
         //     currentState = GameState.MatchCheck;
         // }
-    }
+    //}
 
     // 盤面上にマッチングしているピースがあるかどうかを判断する
     private void MatchCheck()
