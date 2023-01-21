@@ -284,7 +284,7 @@ public class Board : MonoBehaviour {
                 Destroy(piece.gameObject);
             }
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         endCallBadk();
     }
 
@@ -341,7 +341,7 @@ public class Board : MonoBehaviour {
             string flicdStr;
             var Tpos = GetPieceBoardPos(targetPiece);
             var touch = Input.GetTouch(i);
-            longd = (int)targetPiece.GetLength();
+            
             switch (touch.phase)
             {
                 case TouchPhase.Began:
@@ -399,6 +399,7 @@ public class Board : MonoBehaviour {
                     switch(kind)
                     {
                         case PieceKind.LongNote:
+                            longd = (int)targetPiece.GetLength();
                             targetPiece.longdowncount += Time.deltaTime;
                             if(targetPiece.longdowncount >= longd)
                             {

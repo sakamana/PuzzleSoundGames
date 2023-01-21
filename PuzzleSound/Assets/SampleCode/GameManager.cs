@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
     // ゲームのメインループ
     private void Update()
     {
-        countdown -=Time.deltaTime*2;
+        countdown -=Time.deltaTime;
         //Debug.Log(currentState);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
