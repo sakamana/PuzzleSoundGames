@@ -43,6 +43,7 @@ public class Board : MonoBehaviour {
 
     private Vector2 touchStartPos;
     private Vector2 touchUpPos;
+    private Vector2 touchNowPos;
     private string direction;
     private PieceKind kind;
     private bool touchnow;
@@ -334,159 +335,188 @@ public class Board : MonoBehaviour {
 
     public void MusicTap()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            targetPiece = GetNearestPiece(Input.mousePosition);
-            touchStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            kind = targetPiece.GetKind();
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            GetDirection();//フリックの方向を取得
-            Debug.Log("マウスの方向" + direction);
-            touchnow = false;
-        }
-        var Tpos = GetPieceBoardPos(targetPiece);
-
-        
-        if(targetPiece != null && Tpos.y == BarYPos)
+        var touchCount = Input.touchCount;
+        for(var i = 0; i < touchCount; i++)
         {
             string flicdStr;
-            switch(kind)
+            var Tpos = GetPieceBoardPos(targetPiece);
+            var touch = Input.GetTouch(i);
+            longd = (int)targetPiece.GetLength();
+            switch (touch.phase)
             {
-                case PieceKind.TapNote:
+                case TouchPhase.Began:
                 {
-                    if(Input.GetMouseButtonDown(0))
+                    targetPiece = GetNearestPiece(touch.position);
+                    touchStartPos = new Vector2(touch.position.x, touch.position.y);
+                    kind = targetPiece.GetKind();
+                    if(Tpos.y == BarYPos)
                     {
-                        switch(Tpos.x)
+                        switch(kind)
                         {
-                            case 0:
-                                audioSource.PlayOneShot(sound1);
+                            case PieceKind.TapNote:
+                                targetPiece.musicFlag = true;
+                                Debug.Log("赤色true");
+                                SoundColl((int)Tpos.y);
                                 break;
-                            case 1:
-                                audioSource.PlayOneShot(sound2);
+                            case PieceKind.MusicNote:
+                                targetPiece.musicFlag = true;
+                                Debug.Log("黄色true");
+                                SoundColl((int)Tpos.y);
                                 break;
-                            case 2:
-                                audioSource.PlayOneShot(sound3);
-                                break;
-                            case 3:
-                                audioSource.PlayOneShot(sound4);
-                                break;
-                            case 4:
-                                audioSource.PlayOneShot(sound5);
-                                break;
-                            case 5:
-                                audioSource.PlayOneShot(sound6);
+                            case PieceKind.LongNote:
+                                SoundColl((int)Tpos.y);
                                 break;
                             default:
                                 break;
                         }
                     }
-                    targetPiece.musicFlag = true;
-                    Debug.Log("赤色true");
+                break;
+                }
+                case TouchPhase.Moved:
+                {
+                    touchNowPos = new Vector2(touch.position.x, touch.position.y);
+                    GetDirection();//フリックの方向を取得
+                    Debug.Log("マウスの方向" + direction);
+                    switch(kind)
+                    {
+                        case PieceKind.FlicNote:
+                            var flicd = targetPiece.GetDir();
+                            flicdStr = flicd.ToString();
+                            if(direction == flicdStr)
+                            {
+                                SoundColl((int)Tpos.y);
+                                targetPiece.musicFlag = true;
+                                Debug.Log("青色true");
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 }
-                case PieceKind.MusicNote:
+                case TouchPhase.Stationary:
+                {
+                    switch(kind)
+                    {
+                        case PieceKind.LongNote:
+                            targetPiece.longdowncount += Time.deltaTime;
+                            if(targetPiece.longdowncount >= longd)
+                            {
+                                Debug.Log("こえた");
+                                targetPiece.musicFlag = true;
+                            }
+                            else if(BarYPos == 0)
+                            {
+                                Debug.Log("ついた");
+                                targetPiece.musicFlag = true;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                }
+                case TouchPhase.Ended:
+                    touchnow = false;
+                    break;
+                case TouchPhase.Canceled:
+                    // システムがタッチの追跡をキャンセルした時に行いたい処理をここに書く
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
-            }
-            
-            if(Input.GetMouseButtonUp(0))
-            {
-                switch(kind)
-                {
-                    case PieceKind.FlicNote:
-                    {
-                        var flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
-                        flicdStr = flicd.ToString();//取得した方向をstringに変換
-                        if(direction == flicdStr)
-                        {
-                            switch(Tpos.x)
-                            {
-                            case 0:
-                                audioSource.PlayOneShot(sound1);
-                                break;
-                            case 1:
-                                audioSource.PlayOneShot(sound2);
-                                break;
-                            case 2:
-                                audioSource.PlayOneShot(sound3);
-                                break;
-                            case 3:
-                                audioSource.PlayOneShot(sound4);
-                                break;
-                            case 4:
-                                audioSource.PlayOneShot(sound5);
-                                break;
-                            case 5:
-                                audioSource.PlayOneShot(sound6);
-                                break;
-                            default:
-                                break;
-                            }
-                            targetPiece.musicFlag = true;
-                            Debug.Log("青色true");
-                        }
-                        break;
-                    }
-                    default:
-                        break;
-                }
-            }
-        }
-        if(Tpos.y == BarYPos && kind == PieceKind.LongNote)
-        {
-            longd = (int)targetPiece.GetLength();
-            touchnow = true;
-            if(Input.GetMouseButtonDown(0))
-                    {
-                        switch(Tpos.x)
-                        {
-                            case 0:
-                                audioSource.PlayOneShot(sound1);
-                                break;
-                            case 1:
-                                audioSource.PlayOneShot(sound2);
-                                break;
-                            case 2:
-                                audioSource.PlayOneShot(sound3);
-                                break;
-                            case 3:
-                                audioSource.PlayOneShot(sound4);
-                                break;
-                            case 4:
-                                audioSource.PlayOneShot(sound5);
-                                break;
-                            case 5:
-                                audioSource.PlayOneShot(sound6);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-        }
-        if(touchnow)
-        {
-            targetPiece.longdowncount += Time.deltaTime;
 
-            if(targetPiece.longdowncount >= longd)
-            {
-                Debug.Log("こえた");
-                targetPiece.musicFlag = true;
-            }
-            else if(BarYPos == 0)
-            {
-                Debug.Log("ついた");
-                targetPiece.musicFlag = true;
-            }
-        }
-        if(targetPiece  == null)
-        {
+
+
+        // if(Input.GetMouseButtonDown(0))
+        // {
+        //     targetPiece = GetNearestPiece(Input.mousePosition);
+        //     touchStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        //     kind = targetPiece.GetKind();
+        // }
+        // if(Input.GetMouseButtonUp(0))
+        // {
+        //     touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        //     GetDirection();//フリックの方向を取得
+        //     Debug.Log("マウスの方向" + direction);
+        //     touchnow = false;
+        // }
+        // var Tpos = GetPieceBoardPos(targetPiece);
+
+        
+        // if(targetPiece != null && Tpos.y == BarYPos)
+        // {
+        //     string flicdStr;
+        //     switch(kind)
+        //     {
+        //         case PieceKind.TapNote:
+        //         {
+        //             if(Input.GetMouseButtonDown(0))
+        //             {
+        //                 SoundColl((int)Tpos.y);
+        //             }
+        //             targetPiece.musicFlag = true;
+        //             Debug.Log("赤色true");
+        //             break;
+        //         }
+        //         case PieceKind.MusicNote:
+        //             break;
+        //         default:
+        //             break;
+
+        //     }
             
-        }
+        //     if(Input.GetMouseButtonUp(0))
+        //     {
+        //         switch(kind)
+        //         {
+        //             case PieceKind.FlicNote:
+        //             {
+        //                 var flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
+        //                 flicdStr = flicd.ToString();//取得した方向をstringに変換
+        //                 if(direction == flicdStr)
+        //                 {
+        //                     SoundColl((int)Tpos.y);
+        //                     targetPiece.musicFlag = true;
+        //                     Debug.Log("青色true");
+        //                 }
+        //                 break;
+        //             }
+        //             default:
+        //                 break;
+        //         }
+        //     }
+        // }
+        // if(Tpos.y == BarYPos && kind == PieceKind.LongNote)
+        // {
+        //     longd = (int)targetPiece.GetLength();
+        //     touchnow = true;
+        //     if(Input.GetMouseButtonDown(0))
+        //             {
+        //                 SoundColl((int)Tpos.y);
+        //             }
+        // }
+        // if(touchnow)
+        // {
+        //     targetPiece.longdowncount += Time.deltaTime;
+
+        //     if(targetPiece.longdowncount >= longd)
+        //     {
+        //         Debug.Log("こえた");
+        //         targetPiece.musicFlag = true;
+        //     }
+        //     else if(BarYPos == 0)
+        //     {
+        //         Debug.Log("ついた");
+        //         targetPiece.musicFlag = true;
+        //     }
+        // }
+        // if(targetPiece  == null)
+        // {
+            
+        // }
         
 
         
@@ -649,8 +679,8 @@ public class Board : MonoBehaviour {
     //フリック時の方向の取得
     private void GetDirection()
     {
-        float directionX = touchUpPos.x - touchStartPos.x;
-        float directionY = touchUpPos.y - touchStartPos.y;
+        float directionX = touchNowPos.x - touchStartPos.x;
+        float directionY = touchNowPos.y - touchStartPos.y;
 
         //差の大きさによる条件分岐
         if(Mathf.Abs(directionY) < Math.Abs(directionX))
@@ -699,5 +729,32 @@ public class Board : MonoBehaviour {
         var clong = verticalMatchCount + horizontalMatchCount - 1;
 
         return clong;
+    }
+
+    private void SoundColl(int pos)
+    {
+        switch(pos)
+        {
+            case 0:
+                audioSource.PlayOneShot(sound1);
+                break;
+            case 1:
+                audioSource.PlayOneShot(sound2);
+                break;
+            case 2:
+                audioSource.PlayOneShot(sound3);
+                break;
+            case 3:
+                audioSource.PlayOneShot(sound4);
+                break;
+            case 4:
+                audioSource.PlayOneShot(sound5);
+                break;
+            case 5:
+                audioSource.PlayOneShot(sound6);
+                break;
+            default:
+                break;
+        }
     }
 }

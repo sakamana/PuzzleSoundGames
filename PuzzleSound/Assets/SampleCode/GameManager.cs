@@ -70,9 +70,9 @@ public class GameManager : MonoBehaviour {
                 case GameState.Idle:
                     Idle();
                     break;
-                //case GameState.PieceMove:
-                    //PieceMove();
-                    //break;
+                // case GameState.PieceMove:
+                //     PieceMove();
+                //     break;
                 case GameState.MatchCheck:
                     MatchCheck();
                     break;
@@ -178,43 +178,20 @@ public class GameManager : MonoBehaviour {
     // プレイヤーがピースを選択しているときの処理
     // private void PieceMove()
     // {
-    //     //------------------------------------------------------------------------------
-    //     var touchCount = Input.touchCount;
-    //     for (var i = 0; i < touchCount; i++)
+    //     if (Input.GetMouseButton(0))
     //     {
-    //         var touch = Input.GetTouch(i);
-    //         switch(touch.phase)
+    //         NextPiece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
+    //         if (NextPiece != selectedPiece)//最短距離のピースと、選択したピースが不一致
     //         {
-    //             case TouchPhase.Moved:
-    //                 NextPiece = board.GetNearestPiece(touch.position);//ピースに最短距離のピースを代入
-    //                 if (NextPiece != selectedPiece)//最短距離のピースと、選択したピースが不一致
-    //                 {
-    //                     board.SwitchPiece(selectedPiece, NextPiece);//選択したピースと、場所入れ替え
-    //                     currentState = GameState.MatchCheck;
-    //                 }
-    //                 break;
-    //                 case TouchPhase.Ended:
-    //                     currentState = GameState.MatchCheck;
-    //                 break;
-    //             default:
-    //                 break;
+    //             board.SwitchPiece(selectedPiece, NextPiece);//選択したピースと、場所入れ替え
+    //             currentState = GameState.MatchCheck;
     //         }
     //     }
-        //------------------------------------------------------------------------------
-        // if (Input.GetMouseButton(0))
-        // {
-        //     NextPiece = board.GetNearestPiece(Input.mousePosition);//ピースに最短距離のピースを代入
-        //     if (NextPiece != selectedPiece)//最短距離のピースと、選択したピースが不一致
-        //     {
-        //         board.SwitchPiece(selectedPiece, NextPiece);//選択したピースと、場所入れ替え
-        //         currentState = GameState.MatchCheck;
-        //     }
-        // }
-        // else
-        // {
-        //     currentState = GameState.MatchCheck;
-        // }
-    //}
+    //     else
+    //     {
+    //         currentState = GameState.MatchCheck;
+    //     }
+    // }
 
     // 盤面上にマッチングしているピースがあるかどうかを判断する
     private void MatchCheck()
