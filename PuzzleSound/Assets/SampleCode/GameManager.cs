@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
     // ゲームのメインループ
     private void Update()
     {
-        countdown -=Time.deltaTime;
+        countdown -=Time.deltaTime * 2;
         //Debug.Log(currentState);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
@@ -217,6 +217,10 @@ public class GameManager : MonoBehaviour {
     private void CreateNotes()
     {
         // Vector2 position = selectedPiece.transform.position;
+        if(selectedPiece == null || NextPiece == null)
+        {
+            currentState = GameState.DeletePiece;
+        }
         board.CreateNotes(selectedPiece,NextPiece);
         currentState = GameState.DeletePiece;
     }
