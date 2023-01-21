@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
     // ゲームのメインループ
     private void Update()
     {
-        countdown -=Time.deltaTime * 2;
+        countdown -=Time.deltaTime*2;
         //Debug.Log(currentState);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
@@ -248,7 +248,7 @@ public class GameManager : MonoBehaviour {
     {   
         board.BarMovePos(countdown);
         board.MusicTap();//ノーツの行数の取得
-        currentState = GameState.Wait;//この2行で音ゲー時にnullのピースが発生しないようにできているかわからない
+        //currentState = GameState.Wait;//この2行で音ゲー時にnullのピースが発生しないようにできているかわからない
         StartCoroutine(board.FillPiece(() => currentState = GameState.MatchCheck));
 
         if(countdown <= 0 )
