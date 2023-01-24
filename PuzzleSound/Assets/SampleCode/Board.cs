@@ -296,35 +296,35 @@ public class Board : MonoBehaviour {
         TimingBar.GetComponent<RectTransform>().position = BarPos;
 
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
-        if(6.5 < countd && countd <= 7.5)
+        if(7.0 < countd && countd <= 8.0)
         {
             BarYPos = 7;
         }
-        else if(5.5 < countd && countd <= 6.5)
+        else if(6.0 < countd && countd <= 7.0)
         {
             BarYPos = 6;
         }
-        else if(4.5 < countd && countd <= 5.5)
+        else if(5.0 < countd && countd <= 6.0)
         {
             BarYPos = 5;
         }
-        else if(3.5 < countd && countd <= 4.5)
+        else if(4.0 < countd && countd <= 5.0)
         {
             BarYPos = 4;
         }
-        else if(2.5 < countd && countd <= 3.5)
+        else if(3.0 < countd && countd <= 4.0)
         {
             BarYPos = 3;
         }
-        else if(1.5 < countd && countd <= 2.5)
+        else if(2.0 < countd && countd <= 3.0)
         {
             BarYPos = 2;
         }
-        else if(0.5 < countd && countd <= 1.5)
+        else if(1.0 < countd && countd <= 2.0)
         {
             BarYPos = 1;
         }
-        else if(0 < countd && countd <= 0.5)
+        else if(0 < countd && countd <= 1.0)
         {
             BarYPos = 0;
         }
@@ -333,6 +333,7 @@ public class Board : MonoBehaviour {
             BarYPos = 10;
         }
     
+    Debug.Log("今のBarYPos" + BarYPos);
     }
 
     public void MusicTap()
