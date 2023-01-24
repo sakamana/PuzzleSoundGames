@@ -122,6 +122,9 @@ public class GameManager : MonoBehaviour {
                 case GameState.DeleteNotes:
                     DeleteNotes();
                     break;
+                case GameState.FillPiece:
+                    FillPiece();
+                    break;
                 default:
                     break;
             }

@@ -35,6 +35,7 @@ public class Piece : MonoBehaviour
     private Image thisImage;
     private RectTransform thisRectTransform;
     private PieceKind kind;
+    private MusicScore mscore;
     private FlicDir fDir;
     private CountLength notelength;
 
@@ -77,12 +78,12 @@ public class Piece : MonoBehaviour
 
     public void SetMusicScore(MusicScore musicScore)
     {
-        Mscore = musicScore;
+        mscore = musicScore;
     }
 
-    public void GetMusicScore()
+    public MusicScore GetMusicScore()
     {
-        return Mscore;
+        return mscore;
     }
 
     //フリックノーツに方向をセットする

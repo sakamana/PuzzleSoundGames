@@ -68,7 +68,7 @@ public class Board : MonoBehaviour {
         timingBarWidth = ( Screen.width / 3 ) / boardWidth;
 
         //バー生成
-        Vector2 firstBarPos = new Vector2(Screen.width / 2, Screen.height / 2 + pieceWidth * 4.5f);
+        Vector2 firstBarPos = new Vector2(Screen.width / 2, Screen.height / 2 + pieceWidth * 4.0f);
         TimingBar.GetComponent<RectTransform>().position = firstBarPos;
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
 
@@ -291,7 +291,7 @@ public class Board : MonoBehaviour {
     public void BarMovePos(float countd)
     {
         Vector2 BarPos = TimingBarPos;
-        BarPos.y = (Screen.height / 2 + pieceWidth * 4.5f) - pieceWidth * (8 - countd);
+        BarPos.y = (Screen.height / 2 + pieceWidth * 4.0f) - pieceWidth * (8 - countd);
         TimingBar.GetComponent<RectTransform>().position = BarPos;
 
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
