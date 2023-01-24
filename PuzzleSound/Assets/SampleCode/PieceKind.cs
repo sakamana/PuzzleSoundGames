@@ -34,3 +34,11 @@ public enum CountLength
     four,
     five,
 }
+
+public enum MusicScore
+{
+    BAD = 0,
+    GOOD,
+    GREAT,
+    PERFECT,
+}

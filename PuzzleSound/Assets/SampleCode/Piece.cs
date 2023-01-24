@@ -75,6 +75,16 @@ public class Piece : MonoBehaviour
         return kind;
     }
 
+    public void SetMusicScore(MusicScore musicScore)
+    {
+        Mscore = musicScore;
+    }
+
+    public void GetMusicScore()
+    {
+        return Mscore;
+    }
+
     //フリックノーツに方向をセットする
     public void SetFlicDir(FlicDir flicDir)
     {

@@ -331,6 +331,7 @@ public class Board : MonoBehaviour {
         {
             BarYPos = 10;
         }
+    
     }
 
     public void MusicTap()
@@ -757,5 +758,10 @@ public class Board : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    private void MusicScoreColl()
+    {
+
     }
 }
