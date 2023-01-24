@@ -48,6 +48,7 @@ public class Board : MonoBehaviour {
     private PieceKind kind;
     private bool touchnow;
     private int longd;
+    private Vector2 musicTpos;
     
     void Start ()
     {
@@ -336,9 +337,9 @@ public class Board : MonoBehaviour {
 
     public void MusicTap()
     {
-        var Tpos = GetPieceBoardPos(targetPiece);
+        //var musicTpos = GetPieceBoardPos(targetPiece);
         var touchCount = Input.touchCount;
-        Debug.Log(Tpos.x);
+        Debug.Log(musicTpos.x);
         for(var i = 0; i < touchCount; i++)
         {
             string flicdStr;
@@ -350,56 +351,25 @@ public class Board : MonoBehaviour {
                 case TouchPhase.Began:
                 {
                     targetPiece = GetNearestPiece(touch.position);
+                    musicTpos = GetPieceBoardPos(targetPiece);
                     touchStartPos = new Vector2(touch.position.x, touch.position.y);
                     kind = targetPiece.GetKind();
-                    if(Tpos.y == BarYPos)
+                    if(musicTpos.y == BarYPos)
                     {
-                        if(kind == PieceKind.TapNote || kind == PieceKind.MusicNote || kind == PieceKind.LongNote)
-                        {
-                            switch(Tpos.x)
-                            {
-                                case 0:
-                                    audioSource.PlayOneShot(sound1);
-                                    Debug.Log("do");
-                                    break;
-                                case 1:
-                                    audioSource.PlayOneShot(sound2);
-                                    Debug.Log("re");
-                                    break;
-                                case 2:
-                                    audioSource.PlayOneShot(sound3);
-                                    Debug.Log("mi");
-                                    break;
-                                case 3:
-                                    audioSource.PlayOneShot(sound4);
-                                    Debug.Log("fa");
-                                    break;
-                                case 4:
-                                    audioSource.PlayOneShot(sound5);
-                                    Debug.Log("so");
-                                    break;
-                                case 5:
-                                    audioSource.PlayOneShot(sound6);
-                                    Debug.Log("ra");
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
                         switch(kind)
                         {
                             case PieceKind.TapNote:
-                                //SoundColl((int)Tpos.x);
+                                SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 Debug.Log("赤色true");
                                 break;
                             case PieceKind.MusicNote:
-                                //SoundColl((int)Tpos.x);
+                                SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 Debug.Log("黄色true");
                                 break;
                             case PieceKind.LongNote:
-                                //SoundColl((int)Tpos.x);
+                                SoundColl((int)musicTpos.x);
                                 break;
                             default:
                                 break;
@@ -417,9 +387,9 @@ public class Board : MonoBehaviour {
                         case PieceKind.FlicNote:
                             var flicd = targetPiece.GetDir();
                             flicdStr = flicd.ToString();
-                            if(direction == flicdStr)
+                            if(direction == flicdStr && targetPiece.musicFlag == false)
                             {
-                                SoundColl((int)Tpos.x);
+                                SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 Debug.Log("青色true");
                             }
@@ -453,6 +423,10 @@ public class Board : MonoBehaviour {
                     break;
                 }
                 case TouchPhase.Ended:
+                    if(kind != PieceKind.FlicNote)
+                    {
+                        //SoundColl((int)Tpos.x);
+                    }
                     touchnow = false;
                     break;
                 case TouchPhase.Canceled:
@@ -462,100 +436,6 @@ public class Board : MonoBehaviour {
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-
-
-
-        // if(Input.GetMouseButtonDown(0))
-        // {
-        //     targetPiece = GetNearestPiece(Input.mousePosition);
-        //     touchStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        //     kind = targetPiece.GetKind();
-        // }
-        // if(Input.GetMouseButtonUp(0))
-        // {
-        //     touchUpPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        //     GetDirection();//フリックの方向を取得
-        //     Debug.Log("マウスの方向" + direction);
-        //     touchnow = false;
-        // }
-        // var Tpos = GetPieceBoardPos(targetPiece);
-
-        
-        // if(targetPiece != null && Tpos.y == BarYPos)
-        // {
-        //     string flicdStr;
-        //     switch(kind)
-        //     {
-        //         case PieceKind.TapNote:
-        //         {
-        //             if(Input.GetMouseButtonDown(0))
-        //             {
-        //                 SoundColl((int)Tpos.y);
-        //             }
-        //             targetPiece.musicFlag = true;
-        //             Debug.Log("赤色true");
-        //             break;
-        //         }
-        //         case PieceKind.MusicNote:
-        //             break;
-        //         default:
-        //             break;
-
-        //     }
-            
-        //     if(Input.GetMouseButtonUp(0))
-        //     {
-        //         switch(kind)
-        //         {
-        //             case PieceKind.FlicNote:
-        //             {
-        //                 var flicd = targetPiece.GetDir();//ノーツにセットされた方向の取得
-        //                 flicdStr = flicd.ToString();//取得した方向をstringに変換
-        //                 if(direction == flicdStr)
-        //                 {
-        //                     SoundColl((int)Tpos.y);
-        //                     targetPiece.musicFlag = true;
-        //                     Debug.Log("青色true");
-        //                 }
-        //                 break;
-        //             }
-        //             default:
-        //                 break;
-        //         }
-        //     }
-        // }
-        // if(Tpos.y == BarYPos && kind == PieceKind.LongNote)
-        // {
-        //     longd = (int)targetPiece.GetLength();
-        //     touchnow = true;
-        //     if(Input.GetMouseButtonDown(0))
-        //             {
-        //                 SoundColl((int)Tpos.y);
-        //             }
-        // }
-        // if(touchnow)
-        // {
-        //     targetPiece.longdowncount += Time.deltaTime;
-
-        //     if(targetPiece.longdowncount >= longd)
-        //     {
-        //         Debug.Log("こえた");
-        //         targetPiece.musicFlag = true;
-        //     }
-        //     else if(BarYPos == 0)
-        //     {
-        //         Debug.Log("ついた");
-        //         targetPiece.musicFlag = true;
-        //     }
-        // }
-        // if(targetPiece  == null)
-        // {
-            
-        // }
-        
-
-        
     }
 
     public void DeleteNotes()
