@@ -336,11 +336,13 @@ public class Board : MonoBehaviour {
 
     public void MusicTap()
     {
+        var Tpos = GetPieceBoardPos(targetPiece);
         var touchCount = Input.touchCount;
+        Debug.Log(Tpos.x);
         for(var i = 0; i < touchCount; i++)
         {
             string flicdStr;
-            var Tpos = GetPieceBoardPos(targetPiece);
+            
             var touch = Input.GetTouch(i);
             
             switch (touch.phase)
@@ -352,20 +354,52 @@ public class Board : MonoBehaviour {
                     kind = targetPiece.GetKind();
                     if(Tpos.y == BarYPos)
                     {
+                        if(kind == PieceKind.TapNote || kind == PieceKind.MusicNote || kind == PieceKind.LongNote)
+                        {
+                            switch(Tpos.x)
+                            {
+                                case 0:
+                                    audioSource.PlayOneShot(sound1);
+                                    Debug.Log("do");
+                                    break;
+                                case 1:
+                                    audioSource.PlayOneShot(sound2);
+                                    Debug.Log("re");
+                                    break;
+                                case 2:
+                                    audioSource.PlayOneShot(sound3);
+                                    Debug.Log("mi");
+                                    break;
+                                case 3:
+                                    audioSource.PlayOneShot(sound4);
+                                    Debug.Log("fa");
+                                    break;
+                                case 4:
+                                    audioSource.PlayOneShot(sound5);
+                                    Debug.Log("so");
+                                    break;
+                                case 5:
+                                    audioSource.PlayOneShot(sound6);
+                                    Debug.Log("ra");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         switch(kind)
                         {
                             case PieceKind.TapNote:
+                                //SoundColl((int)Tpos.x);
                                 targetPiece.musicFlag = true;
                                 Debug.Log("赤色true");
-                                SoundColl((int)Tpos.y);
                                 break;
                             case PieceKind.MusicNote:
+                                //SoundColl((int)Tpos.x);
                                 targetPiece.musicFlag = true;
                                 Debug.Log("黄色true");
-                                SoundColl((int)Tpos.y);
                                 break;
                             case PieceKind.LongNote:
-                                SoundColl((int)Tpos.y);
+                                //SoundColl((int)Tpos.x);
                                 break;
                             default:
                                 break;
@@ -385,7 +419,7 @@ public class Board : MonoBehaviour {
                             flicdStr = flicd.ToString();
                             if(direction == flicdStr)
                             {
-                                SoundColl((int)Tpos.y);
+                                SoundColl((int)Tpos.x);
                                 targetPiece.musicFlag = true;
                                 Debug.Log("青色true");
                             }
@@ -735,25 +769,32 @@ public class Board : MonoBehaviour {
 
     private void SoundColl(int pos)
     {
+        Debug.Log(pos);
         switch(pos)
         {
             case 0:
                 audioSource.PlayOneShot(sound1);
+                Debug.Log("do");
                 break;
             case 1:
                 audioSource.PlayOneShot(sound2);
+                Debug.Log("re");
                 break;
             case 2:
                 audioSource.PlayOneShot(sound3);
+                Debug.Log("mi");
                 break;
             case 3:
                 audioSource.PlayOneShot(sound4);
+                Debug.Log("fa");
                 break;
             case 4:
                 audioSource.PlayOneShot(sound5);
+                Debug.Log("so");
                 break;
             case 5:
                 audioSource.PlayOneShot(sound6);
+                Debug.Log("ra");
                 break;
             default:
                 break;
