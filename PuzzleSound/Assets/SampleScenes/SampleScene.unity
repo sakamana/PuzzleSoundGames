@@ -750,12 +750,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7913f406c5350ea448d13e31457f981b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound1: {fileID: 8300000, guid: 4d7a320184955ae42af732e5c4b5ab89, type: 3}
-  sound2: {fileID: 8300000, guid: 0a95506d6a4909c4ba1c87192c8297c7, type: 3}
-  sound3: {fileID: 8300000, guid: 4abffd241df9dda41a5fb8f6104505ee, type: 3}
-  sound4: {fileID: 8300000, guid: 2382d708c8756cb479a6df6c999710c7, type: 3}
-  sound5: {fileID: 8300000, guid: dd66a746616db0a4e80bf28b02a4e2e3, type: 3}
-  sound6: {fileID: 8300000, guid: d58a10f6027e6c74794edf37cbdc4b27, type: 3}
+  sound1: {fileID: 8300000, guid: 5f247c1d377bf6041aff1e747b7544fb, type: 3}
+  sound2: {fileID: 8300000, guid: 7c42b77ce7b3ce44cb43ad495fd00efc, type: 3}
+  sound3: {fileID: 8300000, guid: e32430a726b62b741910301346f48571, type: 3}
+  sound4: {fileID: 8300000, guid: 4c8877df1bd47f348a25ecc62db049b7, type: 3}
+  sound5: {fileID: 8300000, guid: 8861943416d78c54d87fc69352affb9c, type: 3}
+  sound6: {fileID: 8300000, guid: 921adfdaafbfc244d8a4bcc18b90d7de, type: 3}
   piecePrefab: {fileID: 4675553913009206637, guid: 0feee45d6528d0540a51c9bd3ec7d642, type: 3}
   TimingBar: {fileID: 1869774668}
 --- !u!82 &2129874942
