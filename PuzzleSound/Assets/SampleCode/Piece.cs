@@ -28,6 +28,7 @@ public class Piece : MonoBehaviour
     public bool musicGood;
     public bool musicGreat;
     public bool musicPerfect;
+    public bool musicBad;
 
     public float longdowncount;
 
@@ -56,6 +57,7 @@ public class Piece : MonoBehaviour
         musicGood = false;
         musicGreat = false;
         musicPerfect = false;
+        musicBad = false;
 
         longdowncount = 0;
     }

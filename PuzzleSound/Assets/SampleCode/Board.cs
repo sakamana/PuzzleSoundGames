@@ -292,39 +292,39 @@ public class Board : MonoBehaviour {
     public void BarMovePos(float countd)
     {
         Vector2 BarPos = TimingBarPos;
-        BarPos.y = (Screen.height / 2 + pieceWidth * 4.0f) - pieceWidth * (8 - countd);
+        BarPos.y = (Screen.height / 2 + pieceWidth * 3.5f) - pieceWidth * (8 - countd);
         TimingBar.GetComponent<RectTransform>().position = BarPos;
 
         TimingBarPos = TimingBar.GetComponent<RectTransform>().position;
-        if(7.0 < countd && countd <= 8.0)
+        if(7.5 < countd && countd <= 8.0)
         {
             BarYPos = 7;
         }
-        else if(6.0 < countd && countd <= 7.0)
+        else if(6.5 < countd && countd <= 7.5)
         {
             BarYPos = 6;
         }
-        else if(5.0 < countd && countd <= 6.0)
+        else if(5.5 < countd && countd <= 6.5)
         {
             BarYPos = 5;
         }
-        else if(4.0 < countd && countd <= 5.0)
+        else if(4.5 < countd && countd <= 5.5)
         {
             BarYPos = 4;
         }
-        else if(3.0 < countd && countd <= 4.0)
+        else if(3.5 < countd && countd <= 4.5)
         {
             BarYPos = 3;
         }
-        else if(2.0 < countd && countd <= 3.0)
+        else if(2.5 < countd && countd <= 3.5)
         {
             BarYPos = 2;
         }
-        else if(1.0 < countd && countd <= 2.0)
+        else if(1.5 < countd && countd <= 2.5)
         {
             BarYPos = 1;
         }
-        else if(0 < countd && countd <= 1.0)
+        else if(0 < countd && countd <= 1.5)
         {
             BarYPos = 0;
         }
@@ -333,10 +333,10 @@ public class Board : MonoBehaviour {
             BarYPos = 10;
         }
     
-    Debug.Log("今のBarYPos" + BarYPos);
+    //Debug.Log("今のBarYPos" + BarYPos + "count" + countd);
     }
 
-    public void MusicTap()
+    public void MusicTap(float countd)
     {
         //var musicTpos = GetPieceBoardPos(targetPiece);
         var touchCount = Input.touchCount;
@@ -346,6 +346,7 @@ public class Board : MonoBehaviour {
             string flicdStr;
             
             var touch = Input.GetTouch(i);
+            float scorejadge = Math.Abs(countd - BarYPos);
             
             switch (touch.phase)
             {
@@ -355,27 +356,110 @@ public class Board : MonoBehaviour {
                     musicTpos = GetPieceBoardPos(targetPiece);
                     touchStartPos = new Vector2(touch.position.x, touch.position.y);
                     kind = targetPiece.GetKind();
-                    if(musicTpos.y == BarYPos)
+                    //if(musicTpos.y == BarYPos)
+                    //{
+                    if(0 <= scorejadge || scorejadge <= 0.2)
                     {
                         switch(kind)
                         {
                             case PieceKind.TapNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
+                                targetPiece.musicPerfect = true;
                                 Debug.Log("赤色true");
                                 break;
                             case PieceKind.MusicNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
+                                targetPiece.musicPerfect = true;
                                 Debug.Log("黄色true");
+                                break;
+                            case PieceKind.FlicNote:
+                                targetPiece.musicPerfect = true;
                                 break;
                             case PieceKind.LongNote:
                                 SoundColl((int)musicTpos.x);
+                                targetPiece.musicPerfect = true;
                                 break;
                             default:
                                 break;
                         }
                     }
+                    else if(0.2 < scorejadge || scorejadge <= 0.5)
+                    {
+                        switch(kind)
+                        {
+                            case PieceKind.TapNote:
+                                SoundColl((int)musicTpos.x);
+                                targetPiece.musicFlag = true;
+                                targetPiece.musicGreat = true;
+                                Debug.Log("赤色true");
+                                break;
+                            case PieceKind.MusicNote:
+                                SoundColl((int)musicTpos.x);
+                                targetPiece.musicFlag = true;
+                                targetPiece.musicGreat = true;
+                                Debug.Log("黄色true");
+                                break;
+                            case PieceKind.FlicNote:
+                                targetPiece.musicGreat = true;
+                                break;
+                            case PieceKind.LongNote:
+                                SoundColl((int)musicTpos.x);
+                                targetPiece.musicGreat = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if(0.5 < scorejadge || scorejadge <= 0.8)
+                    {
+                        switch(kind)
+                        {
+                            case PieceKind.TapNote:
+                                SoundColl((int)musicTpos.x);
+                                targetPiece.musicFlag = true;
+                                targetPiece.musicGood = true;
+                                Debug.Log("赤色true");
+                                break;
+                            case PieceKind.MusicNote:
+                                SoundColl((int)musicTpos.x);
+                                targetPiece.musicFlag = true;
+                                targetPiece.musicGood = true;
+                                Debug.Log("黄色true");
+                                break;
+                            case PieceKind.FlicNote:
+                                targetPiece.musicGood = true;
+                                break;
+                            case PieceKind.LongNote:
+                                SoundColl((int)musicTpos.x);
+                                targetPiece.musicGood = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if(0.8 < scorejadge)
+                    {
+                        switch(kind)
+                        {
+                            case PieceKind.TapNote:
+                                targetPiece.musicBad = true;
+                                break;
+                            case PieceKind.MusicNote:
+                                targetPiece.musicBad = true;
+                                break;
+                            case PieceKind.FlicNote:
+                                targetPiece.musicBad = true;
+                                break;
+                            case PieceKind.LongNote:
+                                targetPiece.musicBad = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    //}
                 break;
                 }
                 case TouchPhase.Moved:
@@ -391,8 +475,11 @@ public class Board : MonoBehaviour {
                             if(direction == flicdStr && targetPiece.musicFlag == false)
                             {
                                 SoundColl((int)musicTpos.x);
-                                targetPiece.musicFlag = true;
-                                Debug.Log("青色true");
+                                if(targetPiece.musicPerfect || targetPiece.musicGreat || targetPiece.musicGood)
+                                {
+                                    targetPiece.musicFlag = true;
+                                    Debug.Log("青色true");
+                                }
                             }
                             break;
                         default:
@@ -410,12 +497,18 @@ public class Board : MonoBehaviour {
                             if(targetPiece.longdowncount >= longd)
                             {
                                 Debug.Log("こえた");
-                                targetPiece.musicFlag = true;
+                                if(targetPiece.musicPerfect || targetPiece.musicGreat || targetPiece.musicGood)
+                                {
+                                    targetPiece.musicFlag = true;
+                                }
                             }
                             else if(BarYPos == 0)
                             {
                                 Debug.Log("ついた");
-                                targetPiece.musicFlag = true;
+                                if(targetPiece.musicPerfect || targetPiece.musicGreat || targetPiece.musicGood)
+                                {
+                                    targetPiece.musicFlag = true;
+                                }
                             }
                             break;
                         default:
@@ -424,11 +517,6 @@ public class Board : MonoBehaviour {
                     break;
                 }
                 case TouchPhase.Ended:
-                    if(kind != PieceKind.FlicNote)
-                    {
-                        //SoundColl((int)Tpos.x);
-                    }
-                    touchnow = false;
                     break;
                 case TouchPhase.Canceled:
                     // システムがタッチの追跡をキャンセルした時に行いたい処理をここに書く
@@ -453,11 +541,27 @@ public class Board : MonoBehaviour {
             var kind = piece.GetKind();
             if (piece != null && (kind == ntap || kind == nflic || kind == nlong || kind == nmusic))
             {
-                if(piece.musicFlag)
+                if(piece.musicFlag && piece.musicPerfect)
                 {
-                    GameManager.score++;
+                    GameManager.score+=20;
                     truecount++;
                     Debug.Log(truecount);
+                }
+                else if(piece.musicFlag && piece.musicGreat)
+                {
+                    GameManager.score+=10;
+                    truecount++;
+                    Debug.Log(truecount);
+                }
+                else if(piece.musicFlag && piece.musicGood)
+                {
+                    GameManager.score+=5;
+                    truecount++;
+                    Debug.Log(truecount);
+                }
+                else if(piece.musicFlag && piece.musicBad)
+                {
+                    GameManager.score-=10;
                 }
                 Destroy(piece.gameObject);
             }
