@@ -6,6 +6,13 @@ using UnityEngine.UI;
 // ゲーム管理クラス
 public class GameManager : MonoBehaviour {
 
+    AudioSource audioSource;// 拍関連
+    public AudioClip countL;// 拍関連
+    public AudioClip countS;// 拍関連
+    public const float Start_Seconds = 0.0f;//
+    public const float Interval_Seconds_L = 4.0f;//
+    public const float Interval_Seconds_S = 0.5f;//
+
     // const.
     public const int MachingCount = 3;
 
@@ -54,13 +61,14 @@ public class GameManager : MonoBehaviour {
     {
         board.InitializeBoard(6, 8);
         currentState = GameState.Idle;
-        //audioSource = GetComponent<AudioSource>();  //SE関連
+        audioSource = GetComponent<AudioSource>();  //拍関連
+        InvokeRepeating("PlaySound", Start_Seconds, Interval_Seconds_S);
     }
 
     // ゲームのメインループ
     private void Update()
     {
-        countdown -=Time.deltaTime * 1.5f;
+        countdown -= Time.deltaTime * 2.0f;
         //Debug.Log(currentState);
         if(8 < countdown) //16秒間パズルphase(24~8)
         {
@@ -131,7 +139,7 @@ public class GameManager : MonoBehaviour {
         }
         else if(countdown <= -1)
         {
-            countdown = 23.0f;
+            countdown = 31.0f;
             currentState = GameState.Idle;
         }
         stateText.text = currentState.ToString();
@@ -141,6 +149,11 @@ public class GameManager : MonoBehaviour {
     //-------------------------------------------------------
     // Private Function
     //-------------------------------------------------------
+    private void PlaySound()
+    {
+        audioSource.PlayOneShot(countS);
+        print("Played");
+    }
     // プレイヤーの入力を検知し、ピースを選択状態にする
     private void Idle()
     {
