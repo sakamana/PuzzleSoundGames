@@ -559,7 +559,7 @@ public class Board : MonoBehaviour {
                     truecount++;
                     Debug.Log(truecount);
                 }
-                else if(piece.musicFlag && piece.musicBad)
+                else if(piece.musicBad)
                 {
                     GameManager.score-=10;
                 }
