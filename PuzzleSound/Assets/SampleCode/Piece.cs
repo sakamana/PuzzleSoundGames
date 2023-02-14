@@ -57,7 +57,7 @@ public class Piece : MonoBehaviour
         musicGood = false;
         musicGreat = false;
         musicPerfect = false;
-        musicBad = false;
+        musicBad = true;
 
         longdowncount = 0;
     }

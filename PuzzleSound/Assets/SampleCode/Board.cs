@@ -366,20 +366,24 @@ public class Board : MonoBehaviour {
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 targetPiece.musicPerfect = true;
+                                targetPiece.musicBad = false;
                                 Debug.Log("赤色true");
                                 break;
                             case PieceKind.MusicNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 targetPiece.musicPerfect = true;
+                                targetPiece.musicBad = false;
                                 Debug.Log("黄色true");
                                 break;
                             case PieceKind.FlicNote:
                                 targetPiece.musicPerfect = true;
+                                targetPiece.musicBad = false;
                                 break;
                             case PieceKind.LongNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicPerfect = true;
+                                targetPiece.musicBad = false;
                                 break;
                             default:
                                 break;
@@ -393,20 +397,24 @@ public class Board : MonoBehaviour {
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 targetPiece.musicGreat = true;
+                                targetPiece.musicBad = false;
                                 Debug.Log("赤色true");
                                 break;
                             case PieceKind.MusicNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 targetPiece.musicGreat = true;
+                                targetPiece.musicBad = false;
                                 Debug.Log("黄色true");
                                 break;
                             case PieceKind.FlicNote:
                                 targetPiece.musicGreat = true;
+                                targetPiece.musicBad = false;
                                 break;
                             case PieceKind.LongNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicGreat = true;
+                                targetPiece.musicBad = false;
                                 break;
                             default:
                                 break;
@@ -420,20 +428,24 @@ public class Board : MonoBehaviour {
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 targetPiece.musicGood = true;
+                                targetPiece.musicBad = false;
                                 Debug.Log("赤色true");
                                 break;
                             case PieceKind.MusicNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicFlag = true;
                                 targetPiece.musicGood = true;
+                                targetPiece.musicBad = false;
                                 Debug.Log("黄色true");
                                 break;
                             case PieceKind.FlicNote:
                                 targetPiece.musicGood = true;
+                                targetPiece.musicBad = false;
                                 break;
                             case PieceKind.LongNote:
                                 SoundColl((int)musicTpos.x);
                                 targetPiece.musicGood = true;
+                                targetPiece.musicBad = false;
                                 break;
                             default:
                                 break;
