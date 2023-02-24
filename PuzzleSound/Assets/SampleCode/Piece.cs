@@ -11,6 +11,13 @@ public class Piece : MonoBehaviour
     public bool deleteFlag;
     public bool musicFlag;
 
+    //ピース用スプライト
+    public Sprite RedImg;
+    public Sprite YellowImg;
+    public Sprite BlueImg;
+    public Sprite GreenImg;
+    public Sprite TapNoteImg;
+
     //フリック方向用スプライト 
     public Sprite rightImg;
     public Sprite leftImg;
@@ -173,28 +180,34 @@ public class Piece : MonoBehaviour
         switch (kind)
         {
             case PieceKind.Red:
-                thisImage.color = Color.red;
+                //thisImage.color = Color.red;
+                this.gameObject.GetComponent<Image> ().sprite = RedImg;
                 break;
             case PieceKind.Blue:
-                thisImage.color = Color.blue;
+                //thisImage.color = Color.blue;
+                this.gameObject.GetComponent<Image> ().sprite = BlueImg;
                 break;
             case PieceKind.Green:
-                thisImage.color = Color.green;
+                //thisImage.color = Color.green;
+                this.gameObject.GetComponent<Image> ().sprite = GreenImg;
                 break;
             case PieceKind.Yellow:
-                thisImage.color = Color.yellow;
+                //thisImage.color = Color.yellow;
+                this.gameObject.GetComponent<Image> ().sprite = YellowImg;
                 break;
             case PieceKind.TapNote:
-                thisImage.color = new Color(1, 0.6f, 0.6f, 1.0f);
+                //thisImage.color = new Color(1, 0.6f, 0.6f, 1.0f);
+                this.gameObject.GetComponent<Image> ().sprite = TapNoteImg;
                 break;
             case PieceKind.FlicNote:
-                thisImage.color = new Color(0.6f, 0.8f, 1, 1.0f);
+                //thisImage.color = new Color(0.6f, 0.8f, 1, 1.0f);
                 break;
             case PieceKind.LongNote:
-                thisImage.color = new Color(0.6f, 1, 0.6f, 1.0f);
+                //thisImage.color = new Color(0.6f, 1, 0.6f, 1.0f);
                 break;
             case PieceKind.MusicNote:
-                thisImage.color = new Color(1, 1, 0.6f, 1.0f);
+                //thisImage.color = new Color(1, 1, 0.6f, 1.0f);
+                this.gameObject.GetComponent<Image> ().sprite = TapNoteImg;
                 break;
             default:
                 break;

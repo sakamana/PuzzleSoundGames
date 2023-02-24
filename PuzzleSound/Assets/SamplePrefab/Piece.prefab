@@ -92,18 +92,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deleteFlag: 0
   musicFlag: 0
-  rightImg: {fileID: 21300000, guid: e3f0e20f3e68a05409bf2640ea4d399a, type: 3}
-  leftImg: {fileID: 21300000, guid: 4d49c4b90e6341a44b28c4badbf56a95, type: 3}
-  upImg: {fileID: 21300000, guid: d96dc643075ad3a4f97f0e6d62d4be2b, type: 3}
-  downImg: {fileID: 21300000, guid: f6d30609aac16484fa255f5d5db6e555, type: 3}
+  RedImg: {fileID: 21300000, guid: 053a3bc844fd40e4c93cb62291843b52, type: 3}
+  YellowImg: {fileID: 21300000, guid: 2d01c4e8970a9ee46a3d70b4a67dfbae, type: 3}
+  BlueImg: {fileID: 21300000, guid: 5e198c8684fb4a442a53e1afc0cb2043, type: 3}
+  GreenImg: {fileID: 21300000, guid: 175b2e033e358aa47a11a66252dc671a, type: 3}
+  TapNoteImg: {fileID: 21300000, guid: 364873f30bf91f04c97344fc063ff491, type: 3}
+  rightImg: {fileID: 21300000, guid: 939492e6a0d7df149b5bae2a1ea8d970, type: 3}
+  leftImg: {fileID: 21300000, guid: e8c5197dc62273542962f8158a9342ac, type: 3}
+  upImg: {fileID: 21300000, guid: 9b9e27a4cd2863a46aaf106799566830, type: 3}
+  downImg: {fileID: 21300000, guid: 03443b9cbaaf9e74c89b674b86c521eb, type: 3}
   oneImg: {fileID: 21300000, guid: ccc914c557c80ae4dab85a6c65930533, type: 3}
   twoImg: {fileID: 21300000, guid: bb9feca6110528a42a2c327d0b11087e, type: 3}
-  threeImg: {fileID: 21300000, guid: d17faee9571bdd345a8e50187f7cdc1f, type: 3}
-  fourImg: {fileID: 21300000, guid: 8909715779081a541986555c291ddfec, type: 3}
-  fiveImg: {fileID: 21300000, guid: bbd37426c9bd5544ea7730ec9c09d3f4, type: 3}
+  threeImg: {fileID: 21300000, guid: 5a6d06b05fdb0834d8c4f5a7f0b8e023, type: 3}
+  fourImg: {fileID: 21300000, guid: 8804ab9ddbf4ac5419c592483ff98c14, type: 3}
+  fiveImg: {fileID: 21300000, guid: adc7f4ecbf94fdf4896ffa7a239ae11d, type: 3}
   musicGood: 0
   musicGreat: 0
   musicPerfect: 0
+  musicBad: 0
   longdowncount: 0
 --- !u!54 &-2263774287067381056
 Rigidbody:
