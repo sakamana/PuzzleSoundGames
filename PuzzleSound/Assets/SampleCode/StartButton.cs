@@ -9,4 +9,14 @@ public class StartButton : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void OnclicEndButton()
+    {
+        Application.Quit();
+    }
+
+    public void OnclicBackButton()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }
